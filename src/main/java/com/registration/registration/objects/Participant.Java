@@ -34,7 +34,7 @@ public class Participant {
     private String lastName;
 
     @Column(nullable = false, length = 255)
-    private LocalDate birthday;
+    private String birthday;
 
     @OneToOne(cascade = CascadeType.ALL)
     private Church church;
@@ -85,11 +85,11 @@ public class Participant {
         this.lastName = lastName;
     }
 
-    public LocalDate getBirthday() {
+    public String getBirthday() {
         return this.birthday;
     }
 
-    public void setBirthday(LocalDate birthday) {
+    public void setBirthday(String birthday) {
         this.birthday = birthday;
     }
 
