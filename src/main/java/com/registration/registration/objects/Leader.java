@@ -14,7 +14,7 @@ import org.springframework.lang.NonNull;
 
 @Entity
 @Table(name = "leaders")
-public class Leader {
+public class Leader extends AbstractPerons{
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
