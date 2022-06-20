@@ -1,5 +1,7 @@
 package com.registration.registration.objects;
 
-public class Leader {
+public class Leader{
+    
+    
     
 }
