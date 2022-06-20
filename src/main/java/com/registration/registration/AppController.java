@@ -1,6 +1,5 @@
 package com.registration.registration;
 
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
@@ -16,7 +15,7 @@ public class AppController {
     }
 
     @GetMapping("/role")
-    public ModelAndView registerPage(Model model){
+    public ModelAndView rolePage(){
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("role.html");
 
