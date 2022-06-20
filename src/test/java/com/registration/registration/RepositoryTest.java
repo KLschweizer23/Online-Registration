@@ -85,6 +85,8 @@ public class RepositoryTest {
         leader.setLastName("Billones");
         leader.setAdmin(true);
 
+        //leader.setAge(21);
+
         Church church = entityManager.find(Church.class, 1L);
         if(church != null){
             leader.setChurch(church);
