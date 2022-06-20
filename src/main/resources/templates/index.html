@@ -1,19 +1,70 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.thymeLeaf.org">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="/css/app.css">
     <title>Welcome! - Apple Division Mini-Camp!</title>
 </head>
 <body class="">
     <div>
-
+        <nav class="navbar navbar-expand-md bg-light navbar-light">
+            <!-- Brand -->
+            <a class="navbar-brand border-separator" th:href="@{/}">
+                <img src="./img/ufy_logo.png" alt="Logo" style="width:50px">
+            </a>
+          
+            <!-- Toggler/collapsibe Button -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+          
+            <!-- Navbar links -->
+            <div class="collapse navbar-collapse" id="collapsibleNavbar">
+              <ul class="navbar-nav">
+                <li class="nav-item text-right">
+                  <a class="nav-link" th:href="@{/details}">Details</a>
+                </li>
+                <li class="nav-item text-right">
+                  <a class="nav-link" th:href="@{/events}">Events</a>
+                </li>
+                <li class="nav-item text-right">
+                  <a class="nav-link" th:href="@{/about}">About us</a>
+                </li>
+              </ul>
+            </div>
+          </nav>
     </div>
     <div class="mainBackground text-center" style="height: 500px; width: 100%">
-        Apple Division Mini Camp
+        <div class="center ">
+            <h5 class="apple">Apple Division</h5>
+            <h1 class="mainHeading">Mini Camp</h1>
+        </div>
+    </div>
+    <div class="secondBackground" style="width:100%; height:100%;">
+        <div class="">
+            <img src="./img/grass.png" alt="grass" style="width:150px">
+        </div>
+        <div class="text-center ">
+            <h1 class="font-cabin" style="font-size: 5em;">How to join?</h1>
+            <p>
+                If you are not registered yet, click <a th:href="@{/register}">here</a> to register as a camper! 
+            </p>
+            <div>
+                <button class="btn btn-primary">Sign in as camper</button>
+            </div>
+            <div class="mt-1">
+                <button class="btn btn-secondary">Sign in as leader</button>
+            </div>
+            <div class="text-right">
+                <img src="./img/grass.png" alt="grass" style="width:200px; transform: rotate(180deg); bottom:0%;">
+            </div>
+        </div>
     </div>
 </body>
 </html>
