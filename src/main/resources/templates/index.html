@@ -52,15 +52,19 @@
         </div>
         <div class="text-center ">
             <h1 class="font-cabin" style="font-size: 5em;">How to join?</h1>
-            <p>
-                If you are not registered yet, click <a th:href="@{/register}">here</a> to register as a camper! 
-            </p>
             <div>
-                <button class="btn btn-primary">Sign in as camper</button>
+                <a th:href="@{/Login}">
+                    <button class="btn btn-primary" th:href="@{/Login}">Sign in as camper</button>
+                </a>
             </div>
             <div class="mt-1">
-                <button class="btn btn-secondary">Sign in as leader</button>
+                <a th:href="@{/Login}">
+                    <button class="btn btn-secondary">Sign in as leader</button>
+                </a>
             </div>
+            <p class="mt-3">
+                If you are not registered yet, click <a th:href="@{/register}">here</a> to register! 
+            </p>
             <div class="text-right">
                 <img src="./img/grass.png" alt="grass" style="width:200px; transform: rotate(180deg); bottom:0%;">
             </div>
