@@ -9,6 +9,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import org.springframework.lang.NonNull;
+
 
 @Entity
 @Table(name = "leaders")
@@ -32,6 +34,9 @@ public class Leader{
 
     @OneToOne(cascade = CascadeType.ALL)
     private Church church;
+
+    @NonNull
+    private boolean admin;
 
     public Church getChurch() {
         return this.church;
@@ -72,5 +77,14 @@ public class Leader{
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
+
+	public boolean isAdmin() {
+		return this.admin;
+	}
+
+	public void setAdmin(boolean admin) {
+		this.admin = admin;
+	}
+
 
 }

@@ -11,6 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import org.springframework.lang.NonNull;
+
 @Entity
 @Table(name = "participants")
 public class Participant {
@@ -37,10 +39,10 @@ public class Participant {
     @OneToOne(cascade = CascadeType.ALL)
     private Church church;
 
-    @Column(nullable = false)
+    @NonNull
     private boolean player;
 
-    @Column(nullable = false)
+    @NonNull
     private boolean paid;
 
     public Long getId() {
