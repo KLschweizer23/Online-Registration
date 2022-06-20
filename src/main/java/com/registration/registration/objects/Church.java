@@ -11,6 +11,16 @@ import javax.persistence.Table;
 @Table(name = "churches")
 public class Church {
     
+    public Church(){}
+    
+    public Church(String name){
+        this.name = name;
+    }
+
+    public Church(Long id){
+        this.id = id;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
