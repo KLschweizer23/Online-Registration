@@ -1,0 +1,9 @@
+.mainBackground{
+
+    background-repeat: no-repeat; 
+    background-size: cover; 
+    background-position: bottom;
+    background-image: url('../img/Background.png'); 
+    background-color: #f5f0f6;
+
+}
