@@ -1,5 +1,7 @@
 package com.registration.registration.objects;
 
+import com.registration.registration.objects.abstractObjects.AbstractPerson;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;

@@ -1,4 +1,6 @@
-package com.registration.registration.objects;
+package com.registration.registration.objects.abstractObjects;
+
+import com.registration.registration.objects.Church;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
