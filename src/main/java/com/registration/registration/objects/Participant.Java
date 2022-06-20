@@ -1,7 +1,5 @@
 package com.registration.registration.objects;
 
-import java.time.LocalDate;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
