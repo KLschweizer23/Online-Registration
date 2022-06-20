@@ -32,6 +32,7 @@ public class Leader{
     @Column(nullable = false, length = 255)
     private String lastName;
 
+    @NonNull
     @OneToOne(cascade = CascadeType.ALL)
     private Church church;
 

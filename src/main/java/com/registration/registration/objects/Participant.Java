@@ -34,6 +34,7 @@ public class Participant {
     @Column(nullable = false, length = 255)
     private String birthday;
 
+    @NonNull
     @OneToOne(cascade = CascadeType.ALL)
     private Church church;
 
