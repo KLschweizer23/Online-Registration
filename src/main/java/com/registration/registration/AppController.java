@@ -22,4 +22,12 @@ public class AppController {
         return modelAndView;
     }
 
+    @GetMapping("/register-camper")
+    public ModelAndView registerCamperPage(){
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("register_camper.html");
+
+        return modelAndView;
+    }
+
 }
