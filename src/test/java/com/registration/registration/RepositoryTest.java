@@ -61,6 +61,7 @@ public class RepositoryTest {
         participant.setPassword("klhicH100");
         participant.setFirstName("Hyacinth");
         participant.setLastName("Billones");
+        participant.setSex("Female");
         participant.setBirthday(LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
         participant.setPaid(false);
         participant.setPlayer(false);
@@ -83,6 +84,7 @@ public class RepositoryTest {
         leader.setPassword("klhicH100");
         leader.setFirstName("Ken Lloyd");
         leader.setLastName("Billones");
+        leader.setSex("Male");
         leader.setAdmin(true);
 
         //leader.setAge(21);

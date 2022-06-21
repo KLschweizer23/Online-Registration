@@ -31,6 +31,9 @@ public class AbstractPerson {
     @Column(nullable = false, length = 255)
     private String lastName;
 
+    @Column(nullable = false)
+    private String sex;
+
     @NonNull
     @OneToOne(cascade = CascadeType.ALL)
     private Church church;
@@ -81,5 +84,13 @@ public class AbstractPerson {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    public String getSex() {
+        return this.sex;
+    }
+
+    public void setSex(String sex) {
+        this.sex = sex;
     }
 }
