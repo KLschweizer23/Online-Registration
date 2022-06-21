@@ -17,7 +17,7 @@ public class Sport {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, length = 255)
+    @Column(nullable = false, unique = true, length = 255)
     private String name;
     
     @Column(nullable = false, length = 255)
@@ -57,5 +57,4 @@ public class Sport {
     public void setPlayers(int players) {
         this.players = players;
     }
-
 }

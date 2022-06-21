@@ -2,8 +2,13 @@ package com.registration.registration.objects;
 
 import com.registration.registration.objects.abstractObjects.AbstractPerson;
 
+import java.util.HashSet;
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 import org.springframework.lang.NonNull;
@@ -20,6 +25,9 @@ public class Participant extends AbstractPerson{
 
     @NonNull
     private boolean paid;
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    private Set<Sport> sports;
 
     public String getBirthday() {
         return this.birthday;
@@ -43,6 +51,14 @@ public class Participant extends AbstractPerson{
 
     public void setPaid(boolean paid) {
         this.paid = paid;
+    }
+
+    public Set<Sport> getSports() {
+        return this.sports;
+    }
+
+    public void setSports(Set<Sport> sports) {
+        this.sports = sports;
     }
 
 }

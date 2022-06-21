@@ -4,6 +4,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.HashSet;
+import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,9 +18,11 @@ import org.springframework.test.annotation.Rollback;
 import com.registration.registration.objects.Church;
 import com.registration.registration.objects.Leader;
 import com.registration.registration.objects.Participant;
+import com.registration.registration.objects.Sport;
 import com.registration.registration.repositories.ChurchRepository;
 import com.registration.registration.repositories.LeaderRepository;
 import com.registration.registration.repositories.ParticipantRepository;
+import com.registration.registration.repositories.SportRepository;
 
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = Replace.NONE)
@@ -35,13 +39,30 @@ public class RepositoryTest {
     private ParticipantRepository participantRepo;
 
     @Autowired
+    private SportRepository sportRepo;
+
+    @Autowired
     private TestEntityManager entityManager;
 
     @Test
     public void test(){
+        testCreateSport("Basketball", "Basketball game", 5);
+        testCreateSport("Volleyball", "Volleyball game", 6);
         testCreateChurch();
         testCreateParticipant();
-        testCreateLeader();
+        //testCreateLeader();
+    }
+    public void testCreateSport(String name, String description, int players){
+        Sport sport = new Sport();
+        sport.setName(name);
+        sport.setDescription(description);
+        sport.setPlayers(players);
+
+        Sport savedSport = sportRepo.save(sport);
+
+        Sport existSport = entityManager.find(Sport.class, savedSport.getId());
+
+        assertThat(existSport.getName()).isEqualTo(sport.getName());
     }
     public void testCreateChurch(){
         Church church = new Church();
@@ -54,7 +75,7 @@ public class RepositoryTest {
 
         assertThat(existChurch.getName()).isEqualTo(church.getName());
     }
-
+    
     public void testCreateParticipant(){
         Participant participant = new Participant();
         participant.setEmail("Hyacinth@gmail.com");
@@ -66,6 +87,12 @@ public class RepositoryTest {
         participant.setPaid(false);
         participant.setPlayer(false);
 
+        Set<Sport> sports = new HashSet<>();
+        sports.add(entityManager.find(Sport.class, 1L));
+        sports.add(entityManager.find(Sport.class, 2L));
+        
+        participant.setSports(sports);
+        
         Church church = entityManager.find(Church.class, 1L);
         if(church != null){
             participant.setChurch(church);
