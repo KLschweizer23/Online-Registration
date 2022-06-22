@@ -134,4 +134,13 @@ public class RepositoryTest {
         }
     }
 
+    @Test
+    public void testFindParticipantByEmail(){
+        String email = "Schweizer23.ss@gmail.com";
+
+        Participant participant = participantRepo.findByEmail(email);
+        
+        assertThat(participant).isNotNull();
+    }
+
 }

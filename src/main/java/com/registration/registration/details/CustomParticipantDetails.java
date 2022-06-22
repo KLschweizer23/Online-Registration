@@ -11,7 +11,7 @@ public class CustomParticipantDetails implements UserDetails{
 
     private Participant participant;
 
-    private CustomParticipantDetails(Participant participant){
+    public CustomParticipantDetails(Participant participant){
         this.participant = participant;
     }
 

@@ -6,4 +6,6 @@ import com.registration.registration.objects.Participant;
 
 public interface ParticipantRepository extends JpaRepository<Participant, Long>{
     
+    Participant findByEmail(String email);
+
 }
