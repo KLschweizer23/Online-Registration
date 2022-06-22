@@ -10,7 +10,7 @@ import com.registration.registration.objects.Participant;
 import com.registration.registration.repositories.ParticipantRepository;
 
 public class CustomParticipantDetailsService implements UserDetailsService{
-
+    
     @Autowired
     private ParticipantRepository participantRepository;
 

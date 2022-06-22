@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -67,6 +68,10 @@ public class AppController {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("register_success.html");
 
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        String encodedPassword = encoder.encode(participant.getPassword());
+        participant.setPassword(encodedPassword);
+
         if(spo != null){
             Sport sport = null;
             Set<Sport> sports = new HashSet<>();
@@ -87,7 +92,7 @@ public class AppController {
     @GetMapping("/camper")
     public ModelAndView camperDashboard(){
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("register_success.html");
+        modelAndView.setViewName("camper.html");
 
         return modelAndView;
     }
