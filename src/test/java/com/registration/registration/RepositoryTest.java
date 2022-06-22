@@ -48,6 +48,9 @@ public class RepositoryTest {
     public void test(){
         testCreateSport("Basketball", "Basketball game", 5);
         testCreateSport("Volleyball", "Volleyball game", 6);
+        testCreateSport("Badminton", "Badminton game", 1);
+        testCreateSport("Chess", "Board game", 1);
+        testCreateSport("Scrabble", "Board game", 1);
         testCreateChurch();
         testCreateParticipant();
         //testCreateLeader();
@@ -88,8 +91,11 @@ public class RepositoryTest {
         participant.setPlayer(false);
 
         Set<Sport> sports = new HashSet<>();
-        sports.add(entityManager.find(Sport.class, 1L));
-        sports.add(entityManager.find(Sport.class, 2L));
+        Sport sport1 = entityManager.find(Sport.class, 1L);
+        Sport sport2 = entityManager.find(Sport.class, 2L);
+        System.out.println("FIND ME: " + sport1.toString() + " AND " + sport2.toString());
+        sports.add(sport1);
+        sports.add(sport2);
         
         participant.setSports(sports);
         

@@ -59,13 +59,13 @@
                         </div>
                         <br><br><br>
                         <div class="col-md-3 col-12">
-                            <label th:field="*{birthday}" for="date" required>Birth date</label><br>
-                            <input type="date" name="date" id="date">
+                            <label for="date" required>Birth date</label><br>
+                            <input th:field="*{birthday}" type="date" name="date" id="date">
                         </div>
                         <br><br><br>
                         <div class="col-md-6 col-12">
-                            <label th:field="*{church}" for="church" required>Church</label>
-                            <select class="form-control form-control-sm" id="church">
+                            <label for="church" required>Church</label>
+                            <select th:field="*{church}" class="form-control form-control-sm" id="church">
                                 <option 
                                     th:each="church : ${churches}" 
                                     th:value="${church.id}" 
@@ -73,8 +73,21 @@
                                 </option>
                             </select>
                         </div>
+                        <br><br><br>
+                        <div class="col-12">
+                            <div class="text-center mt-3">
+                                <h1>Sports</h1>
+                                <p style="font-size:small">Note: Leave unchecked if not participating any sports</p>
+                            </div>
+                            <th:block th:each="sport : ${sports}">
+                                <div class="bg-secondary p-2 m-1 text-light w-auto h-auto" style="border-radius: 20px; display: inline-block;">
+                                        <input type="checkbox" name="spo" th:value="${sport.id}" th:id="${sport.id}">
+                                        <label class="mb-0" th:for="${sport.id}" th:text="${sport.name}"></label>
+                                </div>
+                            </th:block>
+                        </div>
                     </div>
-                    <div>
+                    <div class="text-center mt-3">
                         <button type="submit" class="btn btn-primary">Submit</button>
                     </div>
                 </div>
