@@ -97,4 +97,12 @@ public class AppController {
         return modelAndView;
     }
 
+    @GetMapping("/login")
+    public ModelAndView loginPage(){
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("login.html");
+
+        return modelAndView;
+    }
+
 }

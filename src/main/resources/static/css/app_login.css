@@ -1,0 +1,26 @@
+@font-face {
+    font-family: cicleFont;
+    src: url(../font/Cicle_Family/Cicle\ Fina.ttf);
+}
+@font-face {
+    font-family: cabinSketchFont;
+    src: url(../font/CabinSketch_Family/CabinSketch-Regular.ttf);
+}
+.font-cicle{
+    font-family: cicleFont;
+}
+.font-cabin{
+    font-family: cabinSketchFont;
+}
+
+body{
+    font-family: cicleFont;
+}
+
+.customWidth{
+    width:75%;
+}
+
+.smallShadow{
+    box-shadow: 0.2rem 0.2rem 0.25rem rgba(0,0,0,0.175);
+}
