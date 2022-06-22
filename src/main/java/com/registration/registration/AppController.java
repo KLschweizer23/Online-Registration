@@ -62,7 +62,10 @@ public class AppController {
     }
 
     @PostMapping("/process_camper")
-    public Participant processCamperRegistration(Participant participant, @RequestParam(value = "spo", required = false) long[] spo){
+    public ModelAndView processCamperRegistration(Participant participant, @RequestParam(value = "spo", required = false) long[] spo){
+
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("register_success.html");
 
         if(spo != null){
             Sport sport = null;
@@ -78,16 +81,7 @@ public class AppController {
         }
 
         participantRepository.save(participant);
-        return participant;
-        /*
-        String result = "";
-        if(spo == null)
-            return "null";
-        for(int i = 0; i < spo.length; i++){
-            result += spo[i] + ", ";
-        }
-        return result;
-        */
+        return modelAndView;
     }
 
 }
