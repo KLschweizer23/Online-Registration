@@ -38,6 +38,9 @@ public class AbstractPerson {
     @OneToOne(cascade = CascadeType.ALL)
     private Church church;
 
+    @NonNull
+    private boolean approved;
+
     public Church getChurch() {
         return this.church;
     }
@@ -92,5 +95,13 @@ public class AbstractPerson {
 
     public void setSex(String sex) {
         this.sex = sex;
+    }
+
+    public boolean isApproved() {
+        return this.approved;
+    }
+
+    public void setApproved(boolean approved) {
+        this.approved = approved;
     }
 }
