@@ -84,4 +84,12 @@ public class AppController {
         return modelAndView;
     }
 
+    @GetMapping("/camper")
+    public ModelAndView camperDashboard(){
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("register_success.html");
+
+        return modelAndView;
+    }
+
 }
