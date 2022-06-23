@@ -96,7 +96,7 @@ public class AppController {
     public ModelAndView camperDashboard(){
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("dashboard.html");
-
+        
         return modelAndView;
     }
 

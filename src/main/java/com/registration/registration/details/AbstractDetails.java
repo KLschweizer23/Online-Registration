@@ -5,11 +5,12 @@ import java.util.Collection;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import com.registration.registration.objects.Church;
+
 public abstract class AbstractDetails implements UserDetails{
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        // TODO Auto-generated method stub
         return null;
     }
     
@@ -37,4 +38,8 @@ public abstract class AbstractDetails implements UserDetails{
         return true;
     }
     
+    public abstract String getFullName();
+    public abstract String getRole();
+    public abstract Church getChurch();
+
 }

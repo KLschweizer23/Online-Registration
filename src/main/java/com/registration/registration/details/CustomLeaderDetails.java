@@ -1,5 +1,6 @@
 package com.registration.registration.details;
 
+import com.registration.registration.objects.Church;
 import com.registration.registration.objects.Leader;
 
 public class CustomLeaderDetails extends AbstractDetails{
@@ -19,4 +20,24 @@ public class CustomLeaderDetails extends AbstractDetails{
     public String getUsername() {
         return leader.getEmail();
     }
+
+	@Override
+	public String getFullName() {
+		return leader.getFirstName() + " " + leader.getLastName();
+	}
+
+	@Override
+	public String getRole() {
+		return "leader";
+	}
+
+    @Override
+    public Church getChurch(){
+        return leader.getChurch();
+    }
+
+    public Leader getLeader(){
+        return leader;
+    }
+
 }

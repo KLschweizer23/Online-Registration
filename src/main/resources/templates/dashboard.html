@@ -12,8 +12,10 @@
     <title>My Dashboard! - Apple Division Mini-Camp!</title>
 </head>
 <body  class="" style="background-color:#dbefff">
-    <div class="container customWidth p-5 mt-5 bg-light rounded smallShadow text-center" >
-        <h1>Welcome to Dashboard!</h1>
+    <div th:replace="/views/components/navbar :: navbar"></div>
+    <div class="container customWidth p-5 mt-5 bg-light rounded smallShadow text-center">
+
+        <h1>Welcome [[ ${#request.userPrincipal.principal.getChurch.getName} ]]</h1>
     </div>
 </body>
 </html>
