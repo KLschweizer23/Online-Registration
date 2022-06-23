@@ -13,7 +13,7 @@ import org.springframework.security.web.SecurityFilterChain;
 import com.registration.registration.details.service.CustomParticipantDetailsService;
 
 @Configuration
-public class WebSecurityConfig {
+public class CamperWebSecurityConfig {
 
     @Bean
     public UserDetailsService userDetailsService(){

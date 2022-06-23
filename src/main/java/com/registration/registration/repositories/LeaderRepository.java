@@ -6,4 +6,6 @@ import com.registration.registration.objects.Leader;
 
 public interface LeaderRepository extends JpaRepository<Leader, Long>{
     
+    Leader findByEmail(String email);
+
 }
