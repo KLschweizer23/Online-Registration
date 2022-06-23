@@ -22,5 +22,5 @@ public class CustomParticipantDetailsService implements UserDetailsService{
         }
         return new CustomParticipantDetails(participant);
     }
-    
+
 }

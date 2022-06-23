@@ -111,6 +111,7 @@ public class RepositoryTest {
         }
     }
 
+    @Test
     public void testCreateLeader(){
         Leader leader = new Leader();
         leader.setEmail("Schweizer23.ss@gmail.com");

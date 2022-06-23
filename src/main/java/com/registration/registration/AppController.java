@@ -2,13 +2,17 @@ package com.registration.registration;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
@@ -91,6 +95,34 @@ public class AppController {
         participantRepository.save(participant);
         return modelAndView;
     }
+    
+    /*
+    @PostMapping("/process_camper")
+    public Participant processCamperRegistration(Participant participant, @RequestParam(value = "spo", required = false) long[] spo){
+
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("register_success.html");
+
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        String encodedPassword = encoder.encode(participant.getPassword());
+        participant.setPassword(encodedPassword);
+
+        if(spo != null){
+            Sport sport = null;
+            Set<Sport> sports = new HashSet<>();
+            for(int i = 0; i < spo.length; i++){
+                if(sportRepository.existsById((spo[i]))){
+                    sport = sportRepository.findById(spo[i]).get();
+                    sports.add(sport);
+                }
+            }
+            participant.setPlayer(true);
+            participant.setSports(sports);
+        }
+        
+        return participant;
+    }
+    */
 
     @GetMapping("/camper")
     public ModelAndView camperDashboard(){
@@ -100,12 +132,20 @@ public class AppController {
         return modelAndView;
     }
 
+    @GetMapping("/leader")
+    public ModelAndView leaderDashboard(){
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("leader.html");
+
+        return modelAndView;
+    }
+
     @GetMapping("/login")
-    public ModelAndView loginPage(Model model, @RequestParam(value = "val", required = false) String val){
+    public ModelAndView loginPage(Model model, @RequestParam(value = "vals", required = false) String val){
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("login.html");
 
-        model.addAttribute("val", val);
+        model.addAttribute("vals", val);
 
         if(val != null){
             if(val.equals("leader")){
@@ -119,12 +159,21 @@ public class AppController {
     }
 
     @PostMapping("/login-process")
-    public RedirectView toLoginPage(Model model, @RequestParam(value = "val", required = false) String val){
+    public RedirectView toLoginPage(Model model, @RequestParam(value = "vals", required = false) String val){
         RedirectView rv = new RedirectView();
         rv.setContextRelative(true);
         rv.setUrl("/login");
-        rv.addStaticAttribute("val", val);
+        System.out.println(val);
+        if(val != null){
+            if(val.equals("leader")){
+                rv.setUrl("/login?vals=leader");
+            }
+            else if(val.equals("camper")){
+                rv.setUrl("/login?vals=camper");
+            }
+        }
+        model.addAttribute("vals", val);
         return rv;
     }
-
+    
 }

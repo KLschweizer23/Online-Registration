@@ -15,29 +15,54 @@
     <div class="container customWidth p-5 mt-5 bg-light rounded smallShadow text-center" style="height:500px">
         <div class="container text-center">
             <h1>Sign in</h1>
-            <th:block th:switch="${val}">
+            <th:block th:switch="${vals}">
                 <div th:case="null">
                     <h4>Are you a camper or a leader?</h4>
                     <div class="mt-5">
-                        <a th:href="@{/login?val=camper}">
+                        <a th:href="@{/login(vals='camper')}">
                             <button class="btn btn-primary">Login as camper</button>
                         </a>
-                        <a th:href="@{/login?val=leader}">
+                        <a th:href="@{/login(vals='leader')}">
                             <button class="btn btn-secondary">Login as Leader</button>
                         </a>
                     </div>
                 </div>
                 <div th:case="*">
-                    <th:block th:switch="${val}">
-                        <h4 th:case="leader">as Leader</h4>
-                        <h4 th:case="camper">as Camper</h4>
-                        <form th:action="@{/process_camper}" method="post">
-                            
+                    <th:block th:switch="${vals}">
+                        <div>
+                            <h4 style="display: inline-block;">as</h4>
+                            <h4 th:case="leader" style="display: inline-block;" id="role">Leader</h4>
+                            <h4 th:case="camper" style="display: inline-block;" id="role">Camper</h4>
+                        </div>
+                        <form th:action="@{/login}" method="POST" th:object="${user}" id="myform">
+                            <div class="form-group text-left">
+                                <label for="email">Email</label>
+                                <input th:field="*{email}" type="text" class="form-control form-control-sm" id="email" placeholder="Enter Email" required>
+                            </div>
+                            <div class="form-group text-left">
+                                <label for="password">Password</label>
+                                <input th:field="*{password}" type="password" class="form-control form-control-sm" id="password" placeholder="Enter Password" required>
+                            </div>
+                            <div class="mt-5">
+                                <button type="submit" class="btn btn-primary btn-block">Sign in</button>
+                            </div>
                         </form>
+                        <div class="mt-2">
+                            <button th:href="@{/}" type="submit" class="btn btn-secondary btn-block">Return Home</button>
+                        </div>
                     </th:block>
                 </div>
             </th:block>
         </div>
     </div>
-</body>
+</body>    
+<script type="text/javascript">
+   var roleFirst = $('#role');
+   console.log(roleFirst.text());
+    $('#myform').submit(function(event){
+        var email = $('#email');
+        var role = $('#role');
+        email.val(email.val() + ":" + role.text());
+    });
+</script>
 </html>

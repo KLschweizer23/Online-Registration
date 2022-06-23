@@ -16,32 +16,38 @@ import com.registration.registration.details.service.CustomParticipantDetailsSer
 public class CamperWebSecurityConfig {
 
     @Bean
-    public UserDetailsService camperUserDetailsService(){
+    public UserDetailsService userDetailsService(){
         return new CustomParticipantDetailsService();
     }
 
     @Bean
-    public BCryptPasswordEncoder camperPasswordEncoder(){
+    public BCryptPasswordEncoder passwordEncoder(){
         return new BCryptPasswordEncoder();
     }
 
     @Bean
-    public DaoAuthenticationProvider camperAuthenticationProvider(){
+    public DaoAuthenticationProvider authenticationProvider(){
         DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
-        authProvider.setUserDetailsService(camperUserDetailsService());
-        authProvider.setPasswordEncoder(camperPasswordEncoder());
+        authProvider.setUserDetailsService(userDetailsService());
+        authProvider.setPasswordEncoder(passwordEncoder());
 
         return authProvider;
     }
+
     
     @Bean
-    public SecurityFilterChain camperFilterChain(HttpSecurity http) throws Exception{
+	public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration)throws Exception {
+        return authenticationConfiguration.getAuthenticationManager();
+	}
+    
+    @Bean
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
         http.authorizeRequests()
         .antMatchers("/camper").authenticated()
         .anyRequest().permitAll()
         .and()
         .formLogin()
-            .loginPage("/login?val=camper")
+            .loginPage("/login")
             .usernameParameter("email")
             .defaultSuccessUrl("/camper")
             .permitAll()
@@ -49,5 +55,4 @@ public class CamperWebSecurityConfig {
 
         return http.build();
     }
-
 }

@@ -14,7 +14,6 @@ import com.registration.registration.details.service.CustomLeaderDetailsService;
 
 @Configuration
 public class LeaderWebSecurityConfig {
-
     @Bean
     public UserDetailsService userDetailsService(){
         return new CustomLeaderDetailsService();
@@ -35,10 +34,10 @@ public class LeaderWebSecurityConfig {
     }
 
     @Bean
-    public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
+	public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration)throws Exception {
         return authenticationConfiguration.getAuthenticationManager();
-    }
-    
+	}
+
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
         http.authorizeRequests()
@@ -46,7 +45,7 @@ public class LeaderWebSecurityConfig {
         .anyRequest().permitAll()
         .and()
         .formLogin()
-            .loginPage("/login?val=leader")
+            .loginPage("/login")
             .usernameParameter("email")
             .defaultSuccessUrl("/leader")
             .permitAll()
@@ -54,5 +53,4 @@ public class LeaderWebSecurityConfig {
 
         return http.build();
     }
-
 }

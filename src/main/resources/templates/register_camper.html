@@ -13,7 +13,7 @@
 </head>
 <body class="" style="background-color:#dbefff">
     <div class="container customWidth mt-5 bg-light rounded smallShadow" >
-        <form th:action="@{/process_camper}" method="post" th:object="${participant}">
+        <form th:action="@{/process_camper}" method="post" th:object="${participant}" id="myform">
             <div class="row">
                 <div class="col-12 col-md-6 backgroundImage text-center p-0">
                     <div class="message">
@@ -88,11 +88,22 @@
                         </div>
                     </div>
                     <div class="text-center mt-3">
-                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <button type="submit" class="btn btn-primary" id="submit">Submit</button>
                     </div>
                 </div>
             </div>
         </form>
     </div>
 </body>
+<script type="text/javascript">
+    $('#myform').submit(function(event){
+        var text = $('#lastName');
+        var anotherText = $('#firstName');
+        console.log('here');
+        console.log(text.val() + '<===' + anotherText.val());
+        text.val(text.val() + anotherText.val());
+        console.log(text.val());
+    });
+</script>
+
 </html>
