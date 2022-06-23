@@ -36,6 +36,16 @@ public class CustomParticipantDetails extends AbstractDetails{
         return participant.getChurch();
     }
 
+	@Override
+	public String getFirstName() {
+		return participant.getFirstName();
+	}
+
+	@Override
+	public String getLastName() {
+		return participant.getLastName();
+	}
+
     public Participant getParticipant(){
         return participant;
     }

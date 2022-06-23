@@ -38,6 +38,7 @@ public abstract class AbstractDetails implements UserDetails{
         return true;
     }
     
+    public abstract String getFirstName();
     public abstract String getFullName();
     public abstract String getRole();
     public abstract Church getChurch();

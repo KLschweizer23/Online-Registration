@@ -36,6 +36,16 @@ public class CustomLeaderDetails extends AbstractDetails{
         return leader.getChurch();
     }
 
+	@Override
+	public String getFirstName() {
+		return leader.getFirstName();
+	}
+
+	@Override
+	public String getLastName() {
+		return leader.getLastName();
+	}
+
     public Leader getLeader(){
         return leader;
     }
