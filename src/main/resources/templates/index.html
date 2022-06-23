@@ -64,16 +64,14 @@
         </div>
         <div class="text-center ">
             <h1 class="font-cabin" style="font-size: 5em;">How to join?</h1>
-            <div>
-                <a th:href="@{/Login}">
-                    <button class="btn btn-primary" th:href="@{/Login}">Sign in as camper</button>
-                </a>
-            </div>
-            <div class="mt-1">
-                <a th:href="@{/Login}">
-                    <button class="btn btn-secondary">Sign in as leader</button>
-                </a>
-            </div>
+            <form th:action="@{/login-process}" method="POST">
+                <div>
+                    <button type="submit" name="val" value="camper" class="btn btn-primary">Sign in as camper</button>
+                </div>
+                <div class="mt-1">
+                    <button type="submit" name="val" value="leader" class="btn btn-secondary">Sign in as leader</button>
+                </div>
+            </form>
             <p class="mt-3">
                 If you are not registered yet, click <a th:href="@{/role}">here</a> to register! 
             </p>

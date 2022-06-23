@@ -12,8 +12,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.view.RedirectView;
 
 import com.registration.registration.objects.Church;
+import com.registration.registration.objects.Leader;
 import com.registration.registration.objects.Participant;
 import com.registration.registration.objects.Sport;
 import com.registration.registration.repositories.ChurchRepository;
@@ -36,6 +38,7 @@ public class AppController {
     public ModelAndView homePage(){
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("index.html");
+
         return modelAndView;
     }
 
@@ -98,11 +101,28 @@ public class AppController {
     }
 
     @GetMapping("/login")
-    public ModelAndView loginPage(){
+    public ModelAndView loginPage(Model model, @RequestParam(value = "val", required = false) String val){
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("login.html");
 
+        model.addAttribute("val", val);
+
+        if(val.equals("leader")){
+            model.addAttribute("user", new Leader());
+        } else if(val.equals("camper")){
+            model.addAttribute("user", new Participant());
+        }
+
         return modelAndView;
+    }
+
+    @PostMapping("/login-process")
+    public RedirectView toLoginPage(Model model, @RequestParam(value = "val", required = false) String val){
+        RedirectView rv = new RedirectView();
+        rv.setContextRelative(true);
+        rv.setUrl("/login");
+        rv.addStaticAttribute("val", val);
+        return rv;
     }
 
 }

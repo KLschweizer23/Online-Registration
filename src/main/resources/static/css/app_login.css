@@ -18,9 +18,15 @@ body{
 }
 
 .customWidth{
-    width:75%;
+    width:40%;
 }
 
 .smallShadow{
     box-shadow: 0.2rem 0.2rem 0.25rem rgba(0,0,0,0.175);
+}
+
+@media (max-width: 850px) {
+    .customWidth{
+        width:100%;
+    }
 }
