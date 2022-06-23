@@ -107,10 +107,12 @@ public class AppController {
 
         model.addAttribute("val", val);
 
-        if(val.equals("leader")){
-            model.addAttribute("user", new Leader());
-        } else if(val.equals("camper")){
-            model.addAttribute("user", new Participant());
+        if(val != null){
+            if(val.equals("leader")){
+                model.addAttribute("user", new Leader());
+            } else if(val.equals("camper")){
+                model.addAttribute("user", new Participant());
+            }
         }
 
         return modelAndView;

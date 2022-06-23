@@ -18,7 +18,7 @@ public class CustomLeaderDetailsService implements UserDetailsService{
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         Leader leader = leaderRepository.findByEmail(email);
         if(leader == null){
-            throw new UsernameNotFoundException("User not found!");
+            throw new UsernameNotFoundException("Leader not found!");
         }
         return new CustomLeaderDetails(leader);
     }

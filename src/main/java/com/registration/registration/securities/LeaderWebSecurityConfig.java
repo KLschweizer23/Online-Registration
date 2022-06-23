@@ -46,7 +46,7 @@ public class LeaderWebSecurityConfig {
         .anyRequest().permitAll()
         .and()
         .formLogin()
-            .loginPage("/login")
+            .loginPage("/login?val=leader")
             .usernameParameter("email")
             .defaultSuccessUrl("/leader")
             .permitAll()

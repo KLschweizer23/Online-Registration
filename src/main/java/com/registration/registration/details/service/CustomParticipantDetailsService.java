@@ -18,7 +18,7 @@ public class CustomParticipantDetailsService implements UserDetailsService{
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         Participant participant = participantRepository.findByEmail(email);
         if(participant == null){
-            throw new UsernameNotFoundException("User not found!");
+            throw new UsernameNotFoundException("Participant not found!");
         }
         return new CustomParticipantDetails(participant);
     }
