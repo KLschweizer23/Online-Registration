@@ -12,7 +12,7 @@ import com.registration.registration.objects.Participant;
 import com.registration.registration.repositories.LeaderRepository;
 import com.registration.registration.repositories.ParticipantRepository;
 
-public class CustomLeaderDetailsService implements UserDetailsService{
+public class CustomUserDetailsService implements UserDetailsService{
     
     @Autowired
     private LeaderRepository leaderRepository;

@@ -10,14 +10,13 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
-import com.registration.registration.details.service.CustomParticipantDetailsService;
+import com.registration.registration.details.service.CustomUserDetailsService;
 
 @Configuration
-public class CamperWebSecurityConfig {
-
+public class WebSecurityConfig {
     @Bean
     public UserDetailsService userDetailsService(){
-        return new CustomParticipantDetailsService();
+        return new CustomUserDetailsService();
     }
 
     @Bean
@@ -34,22 +33,21 @@ public class CamperWebSecurityConfig {
         return authProvider;
     }
 
-    
     @Bean
 	public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration)throws Exception {
         return authenticationConfiguration.getAuthenticationManager();
 	}
-    
+
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
         http.authorizeRequests()
-        .antMatchers("/camper").authenticated()
+        .antMatchers("/dashboard").authenticated()
         .anyRequest().permitAll()
         .and()
         .formLogin()
             .loginPage("/login")
             .usernameParameter("email")
-            .defaultSuccessUrl("/camper")
+            .defaultSuccessUrl("/dashboard")
             .permitAll()
         .and().logout().logoutSuccessUrl("/").permitAll();
 
