@@ -16,15 +16,27 @@
         <div class="container text-center">
             <h1>Sign in</h1>
             <th:block th:switch="${vals}">
+                <div th:case="error">
+                    <h4>Oops! There seems to be a problem</h4>
+                    <div class="alert alert-danger" role="alert" style="margin-top: 100px;">
+                        Wrong Credentials!
+                    </div>
+                    <p>Make sure to input proper credentials!</p>
+                    <a th:href="@{/login}">
+                        <button class="btn btn-danger">Back to login</button>
+                    </a>
+                </div>
                 <div th:case="null">
-                    <h4>Are you a camper or a leader?</h4>
-                    <div class="mt-5">
-                        <a th:href="@{/login(vals='camper')}">
-                            <button class="btn btn-primary">Login as camper</button>
-                        </a>
-                        <a th:href="@{/login(vals='leader')}">
-                            <button class="btn btn-secondary">Login as Leader</button>
-                        </a>
+                    <div style="margin-top: 100px;">
+                        <h4>Are you a camper or a leader?</h4>
+                        <div class="mt-5">
+                            <a th:href="@{/login(vals='camper')}">
+                                <button class="btn btn-primary">Login as camper</button>
+                            </a>
+                            <a th:href="@{/login(vals='leader')}">
+                                <button class="btn btn-secondary">Login as Leader</button>
+                            </a>
+                        </div>
                     </div>
                 </div>
                 <div th:case="*">

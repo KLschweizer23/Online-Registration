@@ -47,6 +47,7 @@ public class WebSecurityConfig {
         .formLogin()
             .loginPage("/login")
             .usernameParameter("email")
+            .failureForwardUrl("/login-process?vals=error")
             .defaultSuccessUrl("/dashboard")
             .permitAll()
         .and().logout().logoutSuccessUrl("/").permitAll();

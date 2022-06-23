@@ -92,46 +92,10 @@ public class AppController {
         return modelAndView;
     }
     
-    /*
-    @PostMapping("/process_camper")
-    public Participant processCamperRegistration(Participant participant, @RequestParam(value = "spo", required = false) long[] spo){
-
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("register_success.html");
-
-        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-        String encodedPassword = encoder.encode(participant.getPassword());
-        participant.setPassword(encodedPassword);
-
-        if(spo != null){
-            Sport sport = null;
-            Set<Sport> sports = new HashSet<>();
-            for(int i = 0; i < spo.length; i++){
-                if(sportRepository.existsById((spo[i]))){
-                    sport = sportRepository.findById(spo[i]).get();
-                    sports.add(sport);
-                }
-            }
-            participant.setPlayer(true);
-            participant.setSports(sports);
-        }
-        
-        return participant;
-    }
-    */
-
-    @GetMapping("/camper")
+    @GetMapping("/dashboard")
     public ModelAndView camperDashboard(){
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("camper.html");
-
-        return modelAndView;
-    }
-
-    @GetMapping("/leader")
-    public ModelAndView leaderDashboard(){
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("leader.html");
+        modelAndView.setViewName("dashboard.html");
 
         return modelAndView;
     }
@@ -167,7 +131,11 @@ public class AppController {
             else if(val.equals("camper")){
                 rv.setUrl("/login?vals=camper");
             }
+            else if(val.equals("error")){
+                rv.setUrl("login?vals=error");
+            }
         }
+        
         model.addAttribute("vals", val);
         return rv;
     }
