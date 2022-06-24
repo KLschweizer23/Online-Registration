@@ -1,3 +1,30 @@
 <div th:fragment="view" class="h-100">
-    
+    <form th:action="@{/dashboard-search}" method="POST">
+        <div class="input-group mb-3">
+            <input type="text" class="form-control form-control-sm" name="search" placeholder="Search...">
+            <div class="input-group-append"><button th:href="@{/dashboard/search}" class="btn btn-custom-primary"><i class="text-white">Search</i></button></div>
+        </div>
+    </form>
+    <div>
+        <table class="table table-hover">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">First</th>
+                <th scope="col">Last</th>
+                <th scope="col" th:if="${#request.userPrincipal.principal.getRole} == leader">Email</th>
+                <th scope="col">Church</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr th:each="camper : ${campers_list}">
+                <th scope="row" th:text="${counter.getCount}">#</th>
+                <td th:text="${camper.getFirstName}">First</td>
+                <td th:text="${camper.getLastName}">Last</td>
+                <td th:text="${camper.getEmail}" th:if="${#request.userPrincipal.principal.getRole} == leader">Email</td>
+                <td th:text="${camper.getChurch.getName}">Church</td>
+              </tr>
+            </tbody>
+          </table>
+    </div>
 </div>
