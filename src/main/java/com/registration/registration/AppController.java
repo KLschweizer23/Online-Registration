@@ -1,10 +1,10 @@
 package com.registration.registration;
 
-import java.util.HashSet;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
+import com.registration.registration.details.AbstractDetails;
 import com.registration.registration.objects.Church;
 import com.registration.registration.objects.Leader;
 import com.registration.registration.objects.Participant;
@@ -77,7 +78,7 @@ public class AppController {
 
         if(spo != null){
             Sport sport = null;
-            Set<Sport> sports = new HashSet<>();
+            List<Sport> sports = new ArrayList<>();
             for(int i = 0; i < spo.length; i++){
                 if(sportRepository.existsById((spo[i]))){
                     sport = sportRepository.findById(spo[i]).get();
@@ -93,10 +94,17 @@ public class AppController {
     }
     
     @GetMapping("/dashboard")
-    public ModelAndView camperDashboard(){
+    public ModelAndView camperDashboard(Model model){
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("dashboard.html");
-        
+        AbstractDetails person = (AbstractDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if(person.getRole().equals("camper")){
+            Participant participant = participantRepository.findByEmail(person.getEmail());
+            model.addAttribute("sports", participant.getSports());
+        }else{
+            model.addAttribute("sports", null);
+        }
+
         return modelAndView;
     }
 

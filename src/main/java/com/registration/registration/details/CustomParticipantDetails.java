@@ -64,4 +64,8 @@ public class CustomParticipantDetails extends AbstractDetails{
     public boolean isApproved() {
         return participant.isApproved();
     }
+
+    public String getBirthday(){
+        return participant.getBirthday();
+    }
 }

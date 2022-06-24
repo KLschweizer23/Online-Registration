@@ -4,8 +4,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -90,7 +90,7 @@ public class RepositoryTest {
         participant.setPaid(false);
         participant.setPlayer(false);
 
-        Set<Sport> sports = new HashSet<>();
+        List<Sport> sports = new ArrayList<>();
         Sport sport1 = entityManager.find(Sport.class, 1L);
         Sport sport2 = entityManager.find(Sport.class, 2L);
         System.out.println("FIND ME: " + sport1.toString() + " AND " + sport2.toString());

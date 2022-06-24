@@ -21,13 +21,17 @@
             <nav>
                 <div class="nav nav-tabs" id="nav-tab" role="tablist">
                     <a class="nav-item nav-link active" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="true">Profile</a>
-                    <a class="nav-item nav-link" id="nav-view-tab" data-toggle="tab" href="#nav-view" role="tab" aria-controls="nnav-viewe" aria-selected="false">View</a>
-                    <a class="nav-item nav-link" id="nav-campers-tab" data-toggle="tab" href="#nav-campers" role="tab" aria-controls="nav-campers" aria-selected="false">Manage Campers</a>
-                    <a class="nav-item nav-link" id="nav-sports-tab" data-toggle="tab" href="#nav-sports" role="tab" aria-controls="nav-sports" aria-selected="false">Manage Sports</a>
-                    <a class="nav-item nav-link" id="nav-leaders-tab" data-toggle="tab" href="#nav-leaders" role="tab" aria-controls="nav-leaders" aria-selected="false">Manage Leaders</a>
+                    <th:block th:if="${#request.userPrincipal.principal.isApproved} == true" th:switch="${#request.userPrincipal.principal.getRole}">
+                        <a class="nav-item nav-link" id="nav-view-tab" data-toggle="tab" href="#nav-view" role="tab" aria-controls="nnav-viewe" aria-selected="false">View</a>
+                        <th:block th:case="leader">
+                            <a class="nav-item nav-link" id="nav-campers-tab" data-toggle="tab" href="#nav-campers" role="tab" aria-controls="nav-campers" aria-selected="false">Manage Campers</a>
+                            <a class="nav-item nav-link" id="nav-leaders-tab" data-toggle="tab" href="#nav-leaders" role="tab" aria-controls="nav-leaders" aria-selected="false">Manage Leaders</a>
+                            <a class="nav-item nav-link" id="nav-sports-tab" data-toggle="tab" href="#nav-sports" role="tab" aria-controls="nav-sports" aria-selected="false">Manage Sports</a>
+                        </th:block>
+                    </th:block>
                 </div>
             </nav>
-            <div class="tab-content pt-3" id="nav-tabContent" style="height: 500px;">
+            <div class="tab-content pt-3" id="nav-tabContent" style="height: auto;">
                 <div th:insert="/views/profile :: profile" class="h-100 tab-pane fade show active" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
                     ...
                 </div>

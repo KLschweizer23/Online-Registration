@@ -2,7 +2,7 @@ package com.registration.registration.objects;
 
 import com.registration.registration.objects.abstractObjects.AbstractPerson;
 
-import java.util.Set;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -26,7 +26,7 @@ public class Participant extends AbstractPerson{
     private boolean paid;
 
     @ManyToMany(cascade = CascadeType.ALL)
-    private Set<Sport> sports;
+    private List<Sport> sports;
 
     public String getBirthday() {
         return this.birthday;
@@ -52,11 +52,11 @@ public class Participant extends AbstractPerson{
         this.paid = paid;
     }
 
-    public Set<Sport> getSports() {
+    public List<Sport> getSports() {
         return this.sports;
     }
 
-    public void setSports(Set<Sport> sports) {
+    public void setSports(List<Sport> sports) {
         this.sports = sports;
     }
 

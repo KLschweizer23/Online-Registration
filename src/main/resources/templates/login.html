@@ -73,6 +73,7 @@
    console.log(roleFirst.text());
     $('#myform').submit(function(event){
         var email = $('#email');
+        var tempEmail = email;
         var role = $('#role');
         email.val(email.val() + ":" + role.text());
     });

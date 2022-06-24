@@ -3,7 +3,7 @@
         <h3>Profile</h3>
     </div>
     <th:block th:replace="/views/components/approval :: message"></th:block>
-    <div class="row mt-3 pl-4">
+    <div class="row mt-3 pl-4" th:switch="${#request.userPrincipal.principal.getRole}">
         <div class="col-12 col-md-4 p-0">
             <h4 class="m-0 mb-2">Name</h4>
             <h6 th:text="${#request.userPrincipal.principal.getFullName}">Name</h6>
@@ -16,5 +16,35 @@
             <h4 class="m-0 mb-2">Sex</h4>
             <h6 th:text="${#request.userPrincipal.principal.getSex}">Sex</h6>
         </div>
+        <div th:case="camper" class="col-12 col-md-4 p-0">
+            <h4 class="m-0 mb-2">Birthday</h4>
+            <h6 th:text="${#request.userPrincipal.principal.getBirthday}">Birthday</h6>
+        </div>
     </div>
+    <div class="border-header text-left mt-3 mb-2">
+        <h3>Church</h3>
+    </div>
+    <div class="row mt-3 pl-4">
+        <div class="col-12 col-md-4 p-0">
+            <h4 class="m-0 mb-2">Name</h4>
+            <h6 th:text="${#request.userPrincipal.principal.getChurch.getName}">Church</h6>
+        </div>
+        <div class="col-12 col-md-4 p-0">
+            <h4 class="m-0 mb-2">Address</h4>
+            <h6 th:text="${#request.userPrincipal.principal.getChurch.getAddress}">Address</h6>
+        </div>
+    </div>
+    <th:block th:switch="${#request.userPrincipal.principal.getRole}">
+        <th:block th:case="camper">
+            <div class="border-header text-left mt-3 mb-2">
+                <h3>Sports</h3>
+            </div>
+            <div class="row mt-3 pl-4">
+                <div class="col-12 col-md-4 p-0">
+                    <h4 class="m-0 mb-2">Preferred Sports</h4>
+                    <h6 th:each="sport : ${sports}" th:text="${sport.getName}">Sport</h6>
+                </div>
+            </div>
+        </th:block>
+    </th:block>
 </div>
