@@ -18,7 +18,7 @@ body{
 }
 
 .customWidth{
-    width:80%;
+    width:100%;
 }
 
 .smallShadow{
@@ -49,9 +49,9 @@ body{
     font-family: cicleFont;
     font-size: xx-large;
 }
-@media (max-width:800px) {
-    .apple{
-        font-family: cicleFont;
-        font-size: xx-large;
-    }
+.border-header{
+    border-bottom: 1px solid rgb(175, 175, 175);
+    padding: 0;
+    padding-bottom: 1%;
+    margin-bottom: 1px;
 }

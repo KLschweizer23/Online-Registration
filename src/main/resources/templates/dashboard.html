@@ -13,8 +13,48 @@
 </head>
 <body  class="" style="background-color:#dbefff">
     <div th:replace="/views/components/navbar :: navbar"></div>
-    <div class="container customWidth p-5 mt-5 bg-light rounded smallShadow text-center">
-        <h1>Welcome [[ ${#request.userPrincipal.principal.getFirstName} ]]!</h1>
+    <div class="container customWidth p-5 mt-5 bg-light rounded smallShadow text-center mb-5">
+        <div class="border-header">
+            <h1>Hello [[ ${#request.userPrincipal.principal.getFirstName} ]]!</h1>
+        </div>
+        <div class="pt-2">
+            <nav>
+                <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                    <a class="nav-item nav-link active" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="true">Profile</a>
+                    <a class="nav-item nav-link" id="nav-view-tab" data-toggle="tab" href="#nav-view" role="tab" aria-controls="nnav-viewe" aria-selected="false">View</a>
+                    <a class="nav-item nav-link" id="nav-campers-tab" data-toggle="tab" href="#nav-campers" role="tab" aria-controls="nav-campers" aria-selected="false">Manage Campers</a>
+                    <a class="nav-item nav-link" id="nav-sports-tab" data-toggle="tab" href="#nav-sports" role="tab" aria-controls="nav-sports" aria-selected="false">Manage Sports</a>
+                    <a class="nav-item nav-link" id="nav-leaders-tab" data-toggle="tab" href="#nav-leaders" role="tab" aria-controls="nav-leaders" aria-selected="false">Manage Leaders</a>
+                </div>
+            </nav>
+            <div class="tab-content pt-3" id="nav-tabContent" style="height: 500px;">
+                <div class="h-100 tab-pane fade show active" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+                    <div th:replace="/views/profile :: profile">
+
+                    </div>
+                </div>
+                <div class="h-100 tab-pane fade" id="nav-view" role="tabpanel" aria-labelledby="nav-view-tab">
+                    <div th:replace="/views/view :: view">
+
+                    </div>
+                </div>
+                <div class="h-100 tab-pane fade" id="nav-campers" role="tabpanel" aria-labelledby="nav-campers-tab">
+                    <div th:replace="/views/campers :: campers">
+
+                    </div>
+                </div>
+                <div class="h-100 tab-pane fade" id="nav-sports" role="tabpanel" aria-labelledby="nav-sports-tab">
+                    <div th:replace="/views/sports :: sports">
+
+                    </div>
+                </div>
+                <div class="h-100 tab-pane fade" id="nav-leaders" role="tabpanel" aria-labelledby="nav-leaders-tab">
+                    <div th:replace="/views/leaders :: leaders">
+
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </body>
 </html>
