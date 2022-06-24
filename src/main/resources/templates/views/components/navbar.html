@@ -24,8 +24,8 @@
             </button>
           
             <!-- Navbar links -->
-            <div class="collapse navbar-collapse" id="collapsibleNavbar">
-              <ul class="navbar-nav">
+            <div class="collapse navbar-collapse pr-1" id="collapsibleNavbar" th:switch="${#request.userPrincipal}">
+              <ul class="navbar-nav w-100">
                 <li class="nav-item text-right">
                   <a class="nav-link" th:href="@{/details}">Details</a>
                 </li>
@@ -34,6 +34,14 @@
                 </li>
                 <li class="nav-item text-right">
                   <a class="nav-link" th:href="@{/about}">About us</a>
+                </li>
+              </ul>
+              <ul class="w-100 m-0 p-0">
+                <li class="nav-item text-right" th:case="null" style="float:right">
+                  <a class="nav-link" th:href="@{/login}">Log in</a>
+                </li>
+                <li class="nav-item text-right text-dark" th:case="*" style="float:right; list-style-type: none;">
+                  <a th:href="@{/dashboard}" class="nav-link">Dashboard</a>
                 </li>
               </ul>
             </div>
