@@ -96,7 +96,7 @@ public class AppController {
     
     @GetMapping("/dashboard")
     public ModelAndView camperDashboard(Model model){
-        ModelAndView modelAndView = new ModelAndView();
+        ModelAndView modelAndView = new ModelAndView("thymeleaf/index");
         modelAndView.setViewName("dashboard.html");
 
         model.addAttribute("sports", getSports());
@@ -105,6 +105,11 @@ public class AppController {
         model.addAttribute("counter", new Counter());
 
         return modelAndView;
+    }
+
+    @GetMapping("/dashboard-search")
+    public List<Participant> searchResult(@RequestParam(value = "keyword") String keyword){
+        return getCampers(true, keyword);
     }
 
     @GetMapping("/login")
@@ -161,6 +166,11 @@ public class AppController {
 
     private List<Participant> getCampers(boolean approved){
         List<Participant> participants = approved ? participantRepository.findByApprovedTrue() : participantRepository.findByApprovedFalse();
+        return participants;
+    }
+
+    private List<Participant> getCampers(boolean approved, String keyword){
+        List<Participant> participants = approved ? participantRepository.findByApprovedTrueAndFirstNameContaining(keyword) : participantRepository.findByApprovedFalseAndFirstNameContaining(keyword);
         return participants;
     }
 }

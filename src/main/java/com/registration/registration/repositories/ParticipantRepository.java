@@ -15,8 +15,14 @@ public interface ParticipantRepository extends JpaRepository<Participant, Long>{
     //Find any records that are approved
     List<Participant> findByApprovedTrue();
 
+    //Find any records that are approved and FirstName is equal to arg1
+    List<Participant> findByApprovedTrueAndFirstNameContaining(String firstName);
+
     //Find any records that are not yet approved
     List<Participant> findByApprovedFalse();
+
+    //Find any records that are approved and FirstName is equal to arg1
+    List<Participant> findByApprovedFalseAndFirstNameContaining(String firstName);
 
     //Find any records that are not yet approved
     List<Participant> findByApprovedFalseAndChurchIs(Church church);
