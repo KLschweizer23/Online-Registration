@@ -13,8 +13,8 @@
 </head>
 <body  class="" style="background-color:#dbefff">
     <div th:replace="/views/components/navbar :: navbar"></div>
-    <div class="container customWidth p-5 mt-5 bg-light rounded smallShadow text-center mb-5">
-        <div class="border-header">
+    <div class="container customWidth p-5 mt-5 bg-light rounded smallShadow mb-5">
+        <div class="border-header text-center">
             <h1>Hello [[ ${#request.userPrincipal.principal.getFirstName} ]]!</h1>
         </div>
         <div class="pt-2">
@@ -28,30 +28,20 @@
                 </div>
             </nav>
             <div class="tab-content pt-3" id="nav-tabContent" style="height: 500px;">
-                <div class="h-100 tab-pane fade show active" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
-                    <div th:replace="/views/profile :: profile">
-
-                    </div>
+                <div th:insert="/views/profile :: profile" class="h-100 tab-pane fade show active" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+                    ...
                 </div>
-                <div class="h-100 tab-pane fade" id="nav-view" role="tabpanel" aria-labelledby="nav-view-tab">
-                    <div th:replace="/views/view :: view">
-
-                    </div>
+                <div th:insert="/views/view :: view" class="h-100 tab-pane fade" id="nav-view" role="tabpanel" aria-labelledby="nav-view-tab">
+                    ...
                 </div>
-                <div class="h-100 tab-pane fade" id="nav-campers" role="tabpanel" aria-labelledby="nav-campers-tab">
-                    <div th:replace="/views/campers :: campers">
-
-                    </div>
+                <div th:insert="/views/campers :: campers" class="h-100 tab-pane fade" id="nav-campers" role="tabpanel" aria-labelledby="nav-campers-tab">
+                    ...
                 </div>
-                <div class="h-100 tab-pane fade" id="nav-sports" role="tabpanel" aria-labelledby="nav-sports-tab">
-                    <div th:replace="/views/sports :: sports">
-
-                    </div>
+                <div th:insert="/views/sports :: sports" class="h-100 tab-pane fade" id="nav-sports" role="tabpanel" aria-labelledby="nav-sports-tab">
+                    ...
                 </div>
-                <div class="h-100 tab-pane fade" id="nav-leaders" role="tabpanel" aria-labelledby="nav-leaders-tab">
-                    <div th:replace="/views/leaders :: leaders">
-
-                    </div>
+                <div th:insert="/views/leaders :: leaders" class="h-100 tab-pane fade" id="nav-leaders" role="tabpanel" aria-labelledby="nav-leaders-tab">
+                    ...
                 </div>
             </div>
         </div>

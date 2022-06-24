@@ -1,0 +1,30 @@
+<th:block  th:fragment="message" >
+    <th:block th:if="${#request.userPrincipal.principal.isApproved} == false">
+        <th:block th:switch=" ${#request.userPrincipal.principal.getRole} ">
+            <th:block th:case="leader">
+                <div class="alert alert-danger" role="alert">
+                    Account is not yet approved! Please contact the admin for approval.
+                </div>
+            </th:block>
+            <th:block  th:case="camper">
+                <div class="alert alert-danger" role="alert">
+                    Account is not yet approved! Please contact your local leader for approval.
+                </div>
+            </th:block>
+        </th:block>
+    </th:block>
+    <th:block th:if="${#request.userPrincipal.principal.isApproved} == true">
+        <th:block th:switch=" ${#request.userPrincipal.principal.getRole} ">
+            <th:block th:case="leader">
+                <div class="alert alert-success" role="alert">
+                    Account is approved.
+                </div>
+            </th:block>
+            <th:block  th:case="camper">
+                <div class="alert alert-danger" role="alert">
+                    Account is approved.
+                </div>
+            </th:block>
+        </th:block>
+    </th:block>
+</th:block>

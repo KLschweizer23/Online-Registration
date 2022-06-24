@@ -49,4 +49,19 @@ public class CustomParticipantDetails extends AbstractDetails{
     public Participant getParticipant(){
         return participant;
     }
+
+    @Override
+    public String getEmail() {
+        return participant.getEmail();
+    }
+
+    @Override
+    public String getSex(){
+        return participant.getSex();
+    }
+
+    @Override
+    public boolean isApproved() {
+        return participant.isApproved();
+    }
 }

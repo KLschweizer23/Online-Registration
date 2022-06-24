@@ -50,4 +50,23 @@ public class CustomLeaderDetails extends AbstractDetails{
         return leader;
     }
 
+    @Override
+    public String getEmail() {
+        return leader.getEmail();
+    }
+
+    @Override
+    public String getSex() {
+        return leader.getSex();
+    }
+
+    @Override
+    public boolean isApproved() {
+        return leader.isApproved();
+    }
+
+    public boolean isAdmin(){
+        return leader.isAdmin();
+    }
+
 }

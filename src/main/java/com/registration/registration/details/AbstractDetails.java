@@ -41,7 +41,10 @@ public abstract class AbstractDetails implements UserDetails{
     public abstract String getFirstName();
     public abstract String getLastName();
     public abstract String getFullName();
+    public abstract String getEmail();
+    public abstract String getSex();
     public abstract String getRole();
     public abstract Church getChurch();
+    public abstract boolean isApproved();
 
 }
