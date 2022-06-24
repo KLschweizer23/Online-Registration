@@ -100,12 +100,13 @@ public class AppController {
         modelAndView.setViewName("dashboard.html");
 
         model.addAttribute("sports", getSports());
-        model.addAttribute("campers_list", getCampers());
+        model.addAttribute("approvedCampers", getCampers(true));
+        model.addAttribute("pendingCampers", getCampers(false));
         model.addAttribute("counter", new Counter());
 
         return modelAndView;
     }
-    
+
     @GetMapping("/login")
     public ModelAndView loginPage(Model model, @RequestParam(value = "vals", required = false) String val){
         ModelAndView modelAndView = new ModelAndView();
@@ -158,8 +159,8 @@ public class AppController {
         }
     }
 
-    private List<Participant> getCampers(){
-        List<Participant> participants = participantRepository.findByApprovedTrue();
+    private List<Participant> getCampers(boolean approved){
+        List<Participant> participants = approved ? participantRepository.findByApprovedTrue() : participantRepository.findByApprovedFalse();
         return participants;
     }
 }

@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import com.registration.registration.objects.Church;
 import com.registration.registration.objects.Participant;
 
 public interface ParticipantRepository extends JpaRepository<Participant, Long>{
@@ -13,4 +14,10 @@ public interface ParticipantRepository extends JpaRepository<Participant, Long>{
 
     //Find any records that are approved
     List<Participant> findByApprovedTrue();
+
+    //Find any records that are not yet approved
+    List<Participant> findByApprovedFalse();
+
+    //Find any records that are not yet approved
+    List<Participant> findByApprovedFalseAndChurchIs(Church church);
 }

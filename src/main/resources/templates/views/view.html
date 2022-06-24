@@ -17,7 +17,7 @@
               </tr>
             </thead>
             <tbody>
-              <tr th:each="camper : ${campers_list}">
+              <tr th:each="camper : ${approvedCampers}">
                 <th scope="row" th:text="${counter.getCount}">#</th>
                 <td th:text="${camper.getFirstName}">First</td>
                 <td th:text="${camper.getLastName}">Last</td>
