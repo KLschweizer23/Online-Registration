@@ -1,9 +1,13 @@
 package com.registration.registration.details.service;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
 import com.registration.registration.details.CustomLeaderDetails;
 import com.registration.registration.details.CustomParticipantDetails;
@@ -22,27 +26,16 @@ public class CustomUserDetailsService implements UserDetailsService{
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        String emailPart = null;
-        if(email.contains(":")){
-            int colonIndex = email.lastIndexOf(":");
-            emailPart = email.substring(0, colonIndex);
-        }
-        emailPart = emailPart == null ? email : emailPart;
-
-        String rolePart = null;
-        if(email.contains(":")){
-            int colonIndex = email.lastIndexOf(":");
-            rolePart = email.substring(colonIndex + 1, email.length());
-        }
-
-        if(rolePart.equals("Camper")){
-            Participant camper = participantRepository.findByEmail(emailPart);
+        HttpServletRequest req = ((ServletRequestAttributes)RequestContextHolder.getRequestAttributes()).getRequest();
+        String role = req.getParameter("role");
+        if(role.equals("camper")){
+            Participant camper = participantRepository.findByEmail(email);
             if(camper == null){
                 throw new UsernameNotFoundException("Camper not found!");
             }
             return new CustomParticipantDetails(camper);
-        }else if(rolePart.equals("Leader")){
-            Leader leader = leaderRepository.findByEmail(emailPart);
+        }else if(role.equals("leader")){
+            Leader leader = leaderRepository.findByEmail(email);
             if(leader == null){
                 throw new UsernameNotFoundException("Leader not found!");
             }

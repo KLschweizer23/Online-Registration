@@ -69,13 +69,25 @@
     </div>
 </body>    
 <script type="text/javascript">
-   var roleFirst = $('#role');
-   console.log(roleFirst.text());
-    $('#myform').submit(function(event){
-        var email = $('#email');
-        var tempEmail = email;
-        var role = $('#role');
-        email.val(email.val() + ":" + role.text());
+    var goodRole = '[[${vals}]]';
+    alert(goodRole);
+    window.onload = function(){
+        if(goodRole != 'error'){
+            document.getElementById('myform').action = "/login?role=" + goodRole;
+        }
+    }
+    /*
+    alert(goodRole);
+    $('#myForm').attr('action',function(i,v){
+        alert(v);
+        return v + "\'" + goodRole + "\'";
     });
+        $('#myform').submit(function(event){
+            var email = $('#email');
+            var tempEmail = email;
+            var role = $('#role');
+            email.val(email.val() + ":" + role.text());
+        });
+        */
 </script>
 </html>
