@@ -110,6 +110,20 @@ public class AppController {
         participantRepository.save(participant);
         return modelAndView;
     }
+
+    @PostMapping("/process_leader")
+    public ModelAndView processLeaderRegistration(Leader leader){
+
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("register_success_leader.html");
+
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        String encodedPassword = encoder.encode(leader.getPassword());
+        leader.setPassword(encodedPassword);
+
+        leaderRepository.save(leader);
+        return modelAndView;
+    }
     
     @GetMapping("/dashboard")
     public ModelAndView camperDashboard(Model model){
