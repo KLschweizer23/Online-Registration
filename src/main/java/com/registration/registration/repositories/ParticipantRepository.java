@@ -4,8 +4,8 @@ import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.registration.registration.objects.Church;
 import com.registration.registration.objects.Participant;
+import com.registration.registration.objects.Church;
 
 public interface ParticipantRepository extends JpaRepository<Participant, Long>{
     
