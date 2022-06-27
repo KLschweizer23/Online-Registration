@@ -71,6 +71,19 @@ public class AppController {
         return modelAndView;
     }
 
+    @GetMapping("/register-leader")
+    public ModelAndView leaderCamperPage(Model model){
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("register_leader.html");
+
+        List<Church> listChurch = churchRepository.findAll();
+
+        model.addAttribute("leader", new Leader());
+        model.addAttribute("churches", listChurch);
+        
+        return modelAndView;
+    }
+
     @PostMapping("/process_camper")
     public ModelAndView processCamperRegistration(Participant participant, @RequestParam(value = "spo", required = false) long[] spo){
 
@@ -134,6 +147,7 @@ public class AppController {
         
         Participant participant = participantRepository.findByEmail(email);
         participant.setApproved(true);
+        participant.setPaid(true);
         participantRepository.save(participant);
         return rv;
     }
