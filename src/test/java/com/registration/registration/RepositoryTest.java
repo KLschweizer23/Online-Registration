@@ -90,7 +90,7 @@ public class RepositoryTest {
         participant.setPaid(false);
         participant.setPlayer(false);
 
-        List<Sport> sports = new ArrayList<>();
+        List<Sport> sports = new ArrayList<Sport>();
         Sport sport1 = entityManager.find(Sport.class, 1L);
         Sport sport2 = entityManager.find(Sport.class, 2L);
         System.out.println("FIND ME: " + sport1.toString() + " AND " + sport2.toString());
