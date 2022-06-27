@@ -48,6 +48,30 @@ public class AppController {
         return modelAndView;
     }
 
+    @GetMapping("/details")
+    public ModelAndView detailsPage(){
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("details.html");
+
+        return modelAndView;
+    }
+
+    @GetMapping("/events")
+    public ModelAndView eventsPage(){
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("events.html");
+
+        return modelAndView;
+    }
+
+    @GetMapping("/about")
+    public ModelAndView aboutPage(){
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("about.html");
+
+        return modelAndView;
+    }
+
     @GetMapping("/role")
     public ModelAndView rolePage(){
         ModelAndView modelAndView = new ModelAndView();
