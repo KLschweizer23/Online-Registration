@@ -1,16 +1,25 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.thymeLeaf.org">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
     <link rel="stylesheet" href="/css/app_index.css">
-    <title>Welcome! - Apple Division Mini-Camp!</title>
+    <title>Events - Apple Division Mini-Camp!</title>
 </head>
+
 <body class="">
     <div th:replace="/views/components/navbar :: navbar"></div>
     <div class="mainBackground text-center" style="height: 500px; width: 100%">
@@ -19,5 +28,280 @@
             <h1 class="mainHeading">Events</h1>
         </div>
     </div>
+    <div class="secondBackground py-5" style="width:100%; height:auto;">
+        <div class="w-auto h-auto mx-5 p-5 info-box" style="background-color: white; border-radius: 8px;">
+            <div class="border-header text-center">
+                <h1>Church-Base Events</h1>
+            </div>
+            <nav>
+                <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                    <a class="nav-item nav-link active" id="nav-banner-tab" data-toggle="tab" href="#nav-banner" role="tab"
+                        aria-controls="nav-banner" aria-selected="true">Banner Making</a>
+                    <a class="nav-item nav-link" id="nav-tambourine-tab" data-toggle="tab" href="#nav-tambourine" role="tab"
+                        aria-controls="nav-tambourine" aria-selected="false">Tambourine Dance</a>
+                    <a class="nav-item nav-link" id="nav-song-tab" data-toggle="tab" href="#nav-song" role="tab"
+                        aria-controls="nav-song" aria-selected="false">Song Composition</a>
+                </div>
+            </nav>
+            <div class="tab-content p-3" id="nav-tabContent">
+                <div class="tab-pane fade show active" id="nav-banner" role="tabpanel" aria-labelledby="nav-banner-tab">
+                    <div class="w-100 h-100 text-center">
+                        <h3>Banner Making</h3>
+                    </div>
+                    <h5>How to compete:</h5>
+                    <p>Create a banner that shows the church name. The banner should signify or symbolize your church name</p>
+                    <br>
+                    <h5>Requirements:</h5>
+                    <p>- 1 meter x 1 meter size cloth (tela) in any kind and color</p>
+                    <p>- Only use any recyclable material or any scraps</p>
+                    <p>- Church name must be visible (e.g. Living Temple, Living Word, Tabernacle of Faith, etc.)</p>
+                    <br>
+                    <h5>Penalty</h5>
+                    <p>- Not following the given requirements could result to a deduction of points</p>
+                    <br>
+                    <h5>Time for presentation:</h5>
+                    <p>- First Night (Entrance of colors)</p>
+                </div>
+                <div class="tab-pane fade" id="nav-tambourine" role="tabpanel" aria-labelledby="nav-tambourine-tab">
+                    <div class="w-100 h-100 text-center">
+                        <h3>Tambourine Dance Competition</h3>
+                    </div>
+                    <h5>How to compete:</h5>
+                    <p>Perform a dance composed of tambourine players only</p>
+                    <br>
+                    <h5>Requirements:</h5>
+                    <p>- 1 Christian song as background music</p>
+                    <p>- No Member Limit</p>
+                    <br>
+                    <h5>Penalty</h5>
+                    <p>- Not following the given requirements could result to a deduction of points.</p>
+                    <br>
+                    <h5>Time for presentation:</h5>
+                    <p>- First Night</p>
+                </div>
+                <div class="tab-pane fade" id="nav-song" role="tabpanel" aria-labelledby="nav-song-tab">
+                    <div class="w-100 h-100 text-center">
+                        <h3>Song Composition Competition</h3>
+                    </div>
+                    <h5>How to compete:</h5>
+                    <p>Make a song that is relevant to the theme "Be Transformed" with an acoustic instrument.</p>
+                    <br>
+                    <h5>Requirements:</h5>
+                    <p>- Maximum of 3 members, 1 for acoustic musician and 1 or 2 for singer/s</p>
+                    <p>- Length must be within 2 - 3 minutes.</p>
+                    <br>
+                    <h5>Penalty</h5>
+                    <p>- Not following the given requirements could result to a deduction of points.</p>
+                    <br>
+                    <h5>Time for presentation:</h5>
+                    <p>- Last Night</p>
+                </div>
+            </div>
+            <div class="border-header text-center pt-2" style=" border-top: 1px solid black;">
+                <h1>Color-Base Events</h1>
+            </div>
+            <nav>
+                <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                    <a class="nav-item nav-link active" id="nav-basketball-tab" data-toggle="tab" href="#nav-basketball" role="tab"
+                        aria-controls="nav-basketball" aria-selected="true">Basketball</a>
+                    <a class="nav-item nav-link" id="nav-volleyball-tab" data-toggle="tab" href="#nav-volleyball" role="tab"
+                        aria-controls="nav-volleyball" aria-selected="false">Volleyball</a>
+                    <a class="nav-item nav-link" id="nav-badminton-tab" data-toggle="tab" href="#nav-badminton" role="tab"
+                        aria-controls="nav-badminton" aria-selected="false">Badminton</a>
+                    <a class="nav-item nav-link" id="nav-chess-tab" data-toggle="tab" href="#nav-chess" role="tab"
+                    aria-controls="nav-chess" aria-selected="false">Chess</a>
+                    <a class="nav-item nav-link" id="nav-scrabble-tab" data-toggle="tab" href="#nav-scrabble" role="tab"
+                    aria-controls="nav-scrabble" aria-selected="false">Scrabble</a>
+                    <a class="nav-item nav-link" id="nav-wordfactory-tab" data-toggle="tab" href="#nav-wordfactory" role="tab"
+                    aria-controls="nav-wordfactory" aria-selected="false">Word Factory</a>
+                    <a class="nav-item nav-link" id="nav-bible-tab" data-toggle="tab" href="#nav-bible" role="tab"
+                    aria-controls="nav-bible" aria-selected="false">Bible Games</a>
+                    <a class="nav-item nav-link" id="nav-extempo-tab" data-toggle="tab" href="#nav-extempo" role="tab"
+                    aria-controls="nav-extempo" aria-selected="false">Extemporaneous</a>
+                    <a class="nav-item nav-link" id="nav-teambuilding-tab" data-toggle="tab" href="#nav-teambuilding" role="tab"
+                    aria-controls="nav-teambuilding" aria-selected="false">Team Building</a>
+                </div>
+            </nav>
+            <div class="tab-content p-3" id="nav-tabContent">
+                <div class="tab-pane fade show active" id="nav-basketball" role="tabpanel" aria-labelledby="nav-basketball-tab">
+                    <div class="w-100 h-100 text-center">
+                        <h3>Basketball</h3>
+                    </div>
+                    <h5>How to compete:</h5>
+                    <p>Registration of players will be different and there will be an even grouping after the list of players are collected</p>
+                    <p>Pre-Registration on this site would greatly help sorting out players</p>
+                    <br>
+                    <h5>Requirements:</h5>
+                    <p>- Male</p>
+                    <p>- Member of any Apple Division Foursquare Gospel Church and non-sympathizer</p>
+                    <br>
+                    <h5>Penalty</h5>
+                    <p>- Not following the given requirements are not allowed to participate</p>
+                    <p>- Offensive words and actions will be remove immediately in game or not, Sportmanship is encouraged</p>
+                    <br>
+                    <h5>Time for the Game:</h5>
+                    <p>- First Day</p>
+                </div>
+                <div class="tab-pane fade" id="nav-volleyball" role="tabpanel" aria-labelledby="nav-volleyball-tab">
+                    <div class="w-100 h-100 text-center">
+                        <h3>Volleyball</h3>
+                    </div>
+                    <h5>How to compete:</h5>
+                    <p>Registration of players will be different and there will be an even grouping after the list of players are collected</p>
+                    <p>Pre-Registration on this site would greatly help sorting out players</p>
+                    <br>
+                    <h5>Requirements:</h5>
+                    <p>- Female</p>
+                    <p>- Member of any Apple Division Foursquare Gospel Church and non-sympathizer</p>
+                    <br>
+                    <h5>Penalty</h5>
+                    <p>- Not following the given requirements are not allowed to participate</p>
+                    <p>- Offensive words and actions will be remove immediately in game or not, Sportmanship is encouraged</p>
+                    <br>
+                    <h5>Time for the Game:</h5>
+                    <p>- First Day</p>
+                </div>
+                <div class="tab-pane fade" id="nav-badminton" role="tabpanel" aria-labelledby="nav-badminton-tab">
+                    <div class="w-100 h-100 text-center">
+                        <h3>Badminton</h3>
+                    </div>
+                    <h5>How to compete:</h5>
+                    <p>Registration of players will be different and there will be an even grouping after the list of players are collected</p>
+                    <p>Single rally is the only available rally in badminton</p>
+                    <p>You can provide your own racket for comfortability purposes</p>
+                    <p>Pre-Registration on this site would greatly help sorting out players</p>
+                    <br>
+                    <h5>Requirements:</h5>
+                    <p>- Male or Female</p>
+                    <p>- Member of any Apple Division Foursquare Gospel Church and non-sympathizer</p>
+                    <br>
+                    <h5>Penalty</h5>
+                    <p>- Not following the given requirements are not allowed to participate</p>
+                    <p>- Offensive words and actions will be remove immediately in game or not, Sportmanship is encouraged</p>
+                    <br>
+                    <h5>Time for the Game:</h5>
+                    <p>- First Day</p>
+                </div>
+                <div class="tab-pane fade" id="nav-chess" role="tabpanel" aria-labelledby="nav-chess-tab">
+                    <div class="w-100 h-100 text-center">
+                        <h3>Chess</h3>
+                    </div>
+                    <h5>How to compete:</h5>
+                    <p>Registration of players will be different and there will be an even grouping after the list of players are collected</p>
+                    <p>Pre-Registration on this site would greatly help sorting out players</p>
+                    <br>
+                    <h5>Requirements:</h5>
+                    <p>- Male or Female</p>
+                    <p>- Member of any Apple Division Foursquare Gospel Church and non-sympathizer</p>
+                    <br>
+                    <h5>Penalty</h5>
+                    <p>- Not following the given requirements are not allowed to participate</p>
+                    <p>- Offensive words and actions will be remove immediately in game or not, Sportmanship is encouraged</p>
+                    <br>
+                    <h5>Time for the Game:</h5>
+                    <p>- First Day</p>
+                </div>
+                <div class="tab-pane fade" id="nav-scrabble" role="tabpanel" aria-labelledby="nav-scrabble-tab">
+                    <div class="w-100 h-100 text-center">
+                        <h3>Scrabble</h3>
+                    </div>
+                    <h5>How to compete:</h5>
+                    <p>Registration of players will be different and there will be an even grouping after the list of players are collected</p>
+                    <p>Pre-Registration on this site would greatly help sorting out players</p>
+                    <br>
+                    <h5>Requirements:</h5>
+                    <p>- Male or Female</p>
+                    <p>- Member of any Apple Division Foursquare Gospel Church and non-sympathizer</p>
+                    <br>
+                    <h5>Penalty</h5>
+                    <p>- Not following the given requirements are not allowed to participate</p>
+                    <p>- Offensive words and actions will be remove immediately in game or not, Sportmanship is encouraged</p>
+                    <br>
+                    <h5>Time for the Game:</h5>
+                    <p>- First Day</p>
+                </div>
+                <div class="tab-pane fade" id="nav-wordfactory" role="tabpanel" aria-labelledby="nav-wordfactory-tab">
+                    <div class="w-100 h-100 text-center">
+                        <h3>Word Factory</h3>
+                    </div>
+                    <h5>How to compete:</h5>
+                    <p>Registration of players will be different and there will be an even grouping after the list of players are collected</p>
+                    <p>Pre-Registration on this site would greatly help sorting out players</p>
+                    <br>
+                    <h5>Requirements:</h5>
+                    <p>- Male or Female</p>
+                    <p>- Member of any Apple Division Foursquare Gospel Church and non-sympathizer</p>
+                    <br>
+                    <h5>Penalty</h5>
+                    <p>- Not following the given requirements are not allowed to participate</p>
+                    <p>- Offensive words and actions will be remove immediately in game or not, Sportmanship is encouraged</p>
+                    <br>
+                    <h5>Time for the Game:</h5>
+                    <p>- First Day</p>
+                </div>
+                <div class="tab-pane fade" id="nav-bible" role="tabpanel" aria-labelledby="nav-bible-tab">
+                    <div class="w-100 h-100 text-center">
+                        <h3>Bible Games</h3>
+                    </div>
+                    <h5>How to compete:</h5>
+                    <p>There will be multiple Bible games. All games are announced on-site</p>
+                    <br>
+                    <h5>Requirements:</h5>
+                    <p>- Male or Female</p>
+                    <p>- Member of any Apple Division Foursquare Gospel Church and non-sympathizer</p>
+                    <br>
+                    <h5>Penalty</h5>
+                    <p>- Not following the given requirements are not allowed to participate</p>
+                    <p>- Offensive words and actions will be remove immediately in game or not, Sportmanship is encouraged</p>
+                    <br>
+                    <h5>Time for the Game:</h5>
+                    <p>- First Day</p>
+                </div>
+                <div class="tab-pane fade" id="nav-extempo" role="tabpanel" aria-labelledby="nav-extempo-tab">
+                    <div class="w-100 h-100 text-center">
+                        <h3>Extemporaneous Speaking</h3>
+                    </div>
+                    <h5>Mechanics:</h5>
+                    <p>Compose of 3 members, one person for English, one person for Filipino, and one for Bisaya.</p>
+                    <p>The first person (English) will choose the topic then will be given enough time for preperation to share his/her thoughts in English Language.</p>
+                    <p>Next person will then translate to Filipino, then to Bisaya depending on the team's strategy to either pause every sentence or phrase, but not every word.</p>
+                    <br>
+                    <h5>Requirements:</h5>
+                    <p>- Male or Female</p>
+                    <p>- Member of any Apple Division Foursquare Gospel Church and non-sympathizer</p>
+                    <br>
+                    <h5>Penalty</h5>
+                    <p>- Not following the given requirements are not allowed to participate</p>
+                    <p>- Offensive words and actions will be remove immediately in game or not, Sportmanship is encouraged</p>
+                    <br>
+                    <h5>Time for the Game:</h5>
+                    <p>- Last Night</p>
+                </div>
+                <div class="tab-pane fade" id="nav-teambuilding" role="tabpanel" aria-labelledby="nav-teambuilding-tab">
+                    <div class="w-100 h-100 text-center">
+                        <h3>Team Building</h3>
+                    </div>
+                    <h5>Mechanics:</h5>
+                    <p>All members of the team will be given enough amount of time to finish 5 stations</p>
+                    <p>All stations are surprise and will be announced before the game</p>
+                    <br>
+                    <p><i><b>Note</b>: Bring extra shirts and pants for any unexpected stations that may put you to certain situations</i></p>
+                    <br>
+                    <h5>Requirements:</h5>
+                    <p>- Male or Female</p>
+                    <p>- Member of any Apple Division Foursquare Gospel Church and non-sympathizer</p>
+                    <br>
+                    <h5>Rules</h5>
+                    <p>- Not following the given requirements are not allowed to participate</p>
+                    <p>- Offensive words and actions will be remove immediately in game or not, Sportmanship is encouraged</p>
+                    <p>- No players should wear any revealing outfits like shorts above the knee and sleeveless shirts. Anyone violating this rule will have to change or remove in game</p>
+                    <br>
+                    <h5>Time for the Game:</h5>
+                    <p>- Last Day</p>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
+
 </html>
