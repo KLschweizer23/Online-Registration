@@ -13,26 +13,26 @@ public interface ParticipantRepository extends JpaRepository<Participant, Long>{
     Participant findByEmail(String email);
 
     //Find any records that are approved
-    List<Participant> findByApprovedTrue();
+    List<Participant> findAllByApprovedTrue();
 
     //Find any records that are not yet approved
-    List<Participant> findByApprovedFalse();
+    List<Participant> findAllByApprovedFalse();
 
     //Find any records that are approved and FirstName is equal to arg1
-    List<Participant> findByApprovedTrueAndFirstNameContaining(String firstName);
+    List<Participant> findAllByApprovedTrueAndFirstNameContaining(String firstName);
 
     //Find any records that are not approved and FirstName is equal to arg1
-    List<Participant> findByApprovedFalseAndFirstNameContaining(String firstName);
+    List<Participant> findAllByApprovedFalseAndFirstNameContaining(String firstName);
 
     //Find any records that are not yet approved
-    List<Participant> findByApprovedTrueAndChurchIs(Church church);
+    List<Participant> findAllByApprovedTrueAndChurchIs(Church church);
 
     //Find any records that are not yet approved
-    List<Participant> findByApprovedFalseAndChurchIs(Church church);
+    List<Participant> findAllByApprovedFalseAndChurchIs(Church church);
 
     //Find any records that are not approved and FirstName is equal to arg1
-    List<Participant> findByApprovedFalseAndChurchIsAndFirstNameContaining(Church church, String firstName);
+    List<Participant> findAllByApprovedFalseAndChurchIsAndFirstNameContaining(Church church, String firstName);
 
     //Find any records that are not approved and FirstName is equal to arg1
-    List<Participant> findByApprovedTrueAndChurchIsAndFirstNameContaining(Church church, String firstName);
+    List<Participant> findAllByApprovedTrueAndChurchIsAndFirstNameContaining(Church church, String firstName);
 }

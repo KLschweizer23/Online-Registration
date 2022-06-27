@@ -23,12 +23,27 @@
           <td th:text="${camper.getChurch.getName}">Church</td>
           <td>
             <div>
-              <button class="btn btn-success">Approve</button>
-              <button class="btn btn-danger">Remove</button>
+              <button class="btn btn-success" th:name="${camper.getEmail}" onclick="approvedClicked(this.name)">Approve</button>
+              <button class="btn btn-danger" th:name="${camper.getEmail}" onclick="removeClicked(this.name)">Reject</button>
             </div>
           </td>
         </tr>
       </tbody>
     </table>
   </div>
+  <script th:inline="javascript">
+  /*<![CDATA[*/
+    function approvedClicked(email){
+      var parameter = "?email=" + email;
+      $.get("/dashboard-approve" + parameter).done(function(data){
+        window.location.assign("/dashboard");
+      });
+    }
+    function removeClicked(email){
+      $.get("/dashboard-reject" + parameter).done(function(data){
+        window.location.assign("")
+      });
+    }
+  /*]]>*/
+  </script>
 </div>

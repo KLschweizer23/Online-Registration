@@ -19,7 +19,7 @@
     </table>
   </div>
   <script th:inline="javascript">
-    /*<![CDATA[*/
+  /*<![CDATA[*/
     $(document).ready(function(){
       loadData();
     });
@@ -37,19 +37,17 @@
         var template = '';
         var count = 1;
         data.forEach(x => {
-          template = template.concat(
+          template =
             "<tr>" +
-              "<th scope='row' th:value='5'>" + count + "</th>" +
+              "<th scope='row'>" + count + "</th>" +
               "<td>" + x['firstName'] + "</td>" +
               "<td>" + x['lastName'] + "</td>" +
               "<td>" + x['church']['name'] + "</td>" +
               (isLeader == 'leader' ? "<td>" + x['email'] : "") + "</td>" +
-            "</tr>"
-          );
+            "</tr>";
           count++;
+          document.getElementById('tbody').appendChild(elementFromHtml(template));
         });
-        var rows = elementFromHtml(template);
-        $('#tbody').append(rows);
       });
     }
   /*]]>*/

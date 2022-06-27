@@ -16,7 +16,6 @@ import org.springframework.web.servlet.view.RedirectView;
 
 import com.registration.registration.details.AbstractDetails;
 import com.registration.registration.details.CustomLeaderDetails;
-import com.registration.registration.details.ParticipantDetailsFunction;
 import com.registration.registration.objects.Church;
 import com.registration.registration.objects.Counter;
 import com.registration.registration.objects.Leader;
@@ -99,32 +98,56 @@ public class AppController {
     @GetMapping("/dashboard")
     public ModelAndView camperDashboard(Model model){
         ModelAndView modelAndView = new ModelAndView("thymeleaf/index");
+        modelAndView.setViewName("dashboard.html");
         AbstractDetails details = (AbstractDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        ParticipantDetailsFunction detailsFunction = new ParticipantDetailsFunction();
-
         if(details.getRole().equals("leader")){
             CustomLeaderDetails leaderDetails = (CustomLeaderDetails)details;
             Church church = details.getChurch();
-            if(!leaderDetails.isAdmin()){
-                model.addAttribute("pendingCampers", detailsFunction.getCampers(false));
+            if(leaderDetails.isAdmin()){
+                model.addAttribute("pendingCampers", getCampers(false));
             }else{
-                model.addAttribute(("pendingCampers"), detailsFunction.getCampers(false, church));
+                model.addAttribute(("pendingCampers"), getCampers(false, church));
             }
         }
-
         model.addAttribute("sports", getSports());
-        model.addAttribute("approvedCampers", detailsFunction.getCampers(true));
+        model.addAttribute("approvedCampers", getCampers(true));
         model.addAttribute("counter", new Counter());
-
-        modelAndView.setViewName("dashboard.html");
 
         return modelAndView;
     }
 
     @GetMapping("/dashboard-search")
     public List<Participant> searchResult(@RequestParam(value = "keyword") String keyword){
-        ParticipantDetailsFunction detailsFunction = new ParticipantDetailsFunction();
-        return detailsFunction.getCampers(true, keyword);
+        return getCampers(true, keyword);
+    }
+
+    @GetMapping("/dashboard-approve")
+    public RedirectView approveEmail(@RequestParam(value="email")String email){
+        RedirectView rv = new RedirectView();
+        rv.setContextRelative(true);
+        rv.setUrl("/dashboard");
+        
+        Participant participant = participantRepository.findByEmail(email);
+        participant.setApproved(true);
+        participantRepository.save(participant);
+        return rv;
+    }
+
+    @GetMapping("/dashboard-reject")
+    public RedirectView rejectEmail(@RequestParam(value="email")String email){
+        RedirectView rv = new RedirectView();
+        rv.setContextRelative(true);
+        rv.setUrl("/dashboard");
+        
+        Participant participant = participantRepository.findByEmail(email);
+        participant.setApproved(true);
+        participantRepository.delete(participant);
+        return rv;
+    }
+    
+    public boolean isUserApproved(String email){
+        Participant participant = participantRepository.findByEmail(email);
+        return participant.isApproved();
     }
 
     @GetMapping("/login")
@@ -150,7 +173,6 @@ public class AppController {
         RedirectView rv = new RedirectView();
         rv.setContextRelative(true);
         rv.setUrl("/login");
-        System.out.println(val);
         if(val != null){
             if(val.equals("leader")){
                 rv.setUrl("/login?vals=leader");
@@ -177,5 +199,29 @@ public class AppController {
         }else{
             return null;
         }
+    }
+
+    //getCampers either approved or not
+    private List<Participant> getCampers(boolean approved){
+        List<Participant> participants = approved ? participantRepository.findAllByApprovedTrue() : participantRepository.findAllByApprovedFalse();
+        return participants;
+    }
+
+    //getCampers either approved or not and contains a certain keyword
+    private List<Participant> getCampers(boolean approved, String keyword){
+        List<Participant> participants = approved ? participantRepository.findAllByApprovedTrueAndFirstNameContaining(keyword) : participantRepository.findAllByApprovedFalseAndFirstNameContaining(keyword);
+        return participants;
+    }
+
+    //getCampers either approved or not and contains a certain keyword and is equal to a certain church
+    private List<Participant> getCampers(boolean approved, String keyword, Church church){
+        List<Participant> participants = approved ? participantRepository.findAllByApprovedFalseAndChurchIsAndFirstNameContaining(church, keyword) : participantRepository.findAllByApprovedTrueAndChurchIsAndFirstNameContaining(church, keyword);
+        return participants;
+    }
+
+    //getCampers either approved or not and is equal to a certain church
+    private List<Participant> getCampers(boolean approved, Church church){
+        List<Participant> participants = approved ? participantRepository.findAllByApprovedFalseAndChurchIs(church) : participantRepository.findAllByApprovedTrueAndChurchIs(church);
+        return participants;
     }
 }
