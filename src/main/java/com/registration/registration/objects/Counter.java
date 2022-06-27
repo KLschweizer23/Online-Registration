@@ -7,4 +7,8 @@ public class Counter {
         count++;
         return count;
     }
+
+    public void zeroCount(){
+        count = 0;
+    }
 }
