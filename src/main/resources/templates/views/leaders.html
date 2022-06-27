@@ -1,3 +1,98 @@
 <div th:fragment="leaders">
-    Coming Soon...
+    <div class="border-header text-left mt-3 mb-2">
+        <h3>Leaders</h3>
+    </div>
+    <div style="overflow-x: scroll;">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">First</th>
+                    <th scope="col">Last</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Church</th>
+                    <th scope="col">is Admin</th>
+                    <th scope="col">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="leader : ${approvedLeaders}">
+                    <th scope="row" th:text="${counter.getCount2}">#</th>
+                    <td th:text="${leader.getFirstName}">First</td>
+                    <td th:text="${leader.getLastName}">Last</td>
+                    <td th:text="${leader.getEmail}">Email</td>
+                    <td th:text="${leader.getChurch.getName}">Church</td>
+                    <td th:text="${leader.isAdmin}">Admin</td>
+                    <td>
+                        <div>
+                            <button th:if="${leader.isAdmin == false}" class="btn btn-success" th:name="${leader.getEmail}"
+                                onclick="makeAdmin(this.name)">Promote as admin</button>
+                            <button th:if="${leader.isAdmin}" class="btn btn-danger" th:name="${leader.getEmail}"
+                                onclick="removeAdmin(this.name)">Remove as admin</button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="border-header text-left mt-3 mb-2">
+        <h3>Pending Requests</h3>
+    </div>
+    <div style="overflow-x: scroll;">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">First</th>
+                    <th scope="col">Last</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Church</th>
+                    <th scope="col">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="leader : ${pendingLeaders}">
+                    <th scope="row" th:text="${counter.getCount3}">#</th>
+                    <td th:text="${leader.getFirstName}">First</td>
+                    <td th:text="${leader.getLastName}">Last</td>
+                    <td th:text="${leader.getEmail}">Email</td>
+                    <td th:text="${leader.getChurch.getName}">Church</td>
+                    <td>
+                        <div>
+                            <button class="btn btn-success" th:name="${leader.getEmail}"
+                                onclick="approvedClicked(this.name)">Approve</button>
+                            <button class="btn btn-danger" th:name="${leader.getEmail}"
+                                onclick="removeClicked(this.name)">Reject</button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <script th:inline="javascript">
+        /*<![CDATA[*/
+        function approvedClicked(email) {
+            var parameter = "?email=" + email;
+            $.get("/dashboard-approve-leader" + parameter).done(function (data) {
+                window.location.assign("/dashboard");
+            });
+        }
+        function removeClicked(email) {
+            $.get("/dashboard-reject-leader" + parameter).done(function (data) {
+                window.location.assign("")
+            });
+        }
+        function makeAdmin(email) {
+            var parameter = "?email=" + email;
+            $.get("/dashboard-make-admin" + parameter).done(function (data) {
+                window.location.assign("/dashboard");
+            });
+        }
+        function removeAdmin(email) {
+            $.get("/dashboard-remove-admin" + parameter).done(function (data) {
+                window.location.assign("/dashboard")
+            });
+        }
+      /*]]>*/
+    </script>
 </div>

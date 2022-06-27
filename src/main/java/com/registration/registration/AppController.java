@@ -22,6 +22,7 @@ import com.registration.registration.objects.Leader;
 import com.registration.registration.objects.Participant;
 import com.registration.registration.objects.Sport;
 import com.registration.registration.repositories.ChurchRepository;
+import com.registration.registration.repositories.LeaderRepository;
 import com.registration.registration.repositories.ParticipantRepository;
 import com.registration.registration.repositories.SportRepository;
 
@@ -30,6 +31,8 @@ public class AppController {
     
     @Autowired
     private ParticipantRepository participantRepository;
+    @Autowired
+    private LeaderRepository leaderRepository;
     
     @Autowired
     private ChurchRepository churchRepository;
@@ -111,6 +114,8 @@ public class AppController {
         }
         model.addAttribute("sports", getSports());
         model.addAttribute("approvedCampers", getCampers(true));
+        model.addAttribute("approvedLeaders", getLeaders(true));
+        model.addAttribute("pendingLeaders", getLeaders(false));
         model.addAttribute("counter", new Counter());
 
         return modelAndView;
@@ -145,9 +150,51 @@ public class AppController {
         return rv;
     }
     
-    public boolean isUserApproved(String email){
-        Participant participant = participantRepository.findByEmail(email);
-        return participant.isApproved();
+    @GetMapping("/dashboard-approve-leader")
+    public RedirectView approveLeader(@RequestParam(value="email") String email){
+        RedirectView rv = new RedirectView();
+        rv.setContextRelative(true);
+        rv.setUrl("/dashboard");
+
+        Leader leader = leaderRepository.findByEmail(email);
+        leader.setApproved(true);
+        leaderRepository.save(leader);
+        return rv;
+    }
+    
+    @GetMapping("/dashboard-reject-leader")
+    public RedirectView rejectLeader(@RequestParam(value="email") String email){
+        RedirectView rv = new RedirectView();
+        rv.setContextRelative(true);
+        rv.setUrl("/dashboard");
+
+        Leader leader = leaderRepository.findByEmail(email);
+        leaderRepository.delete(leader);
+        return rv;
+    }
+    
+    @GetMapping("/dashboard-make-admin")
+    public RedirectView makeAdmin(@RequestParam(value="email") String email){
+        RedirectView rv = new RedirectView();
+        rv.setContextRelative(true);
+        rv.setUrl("/dashboard");
+
+        Leader leader = leaderRepository.findByEmail(email);
+        leader.setAdmin(true);
+        leaderRepository.save(leader);
+        return rv;
+    }
+    
+    @GetMapping("/dashboard-remove-admin")
+    public RedirectView removeAdmin(@RequestParam(value="email") String email){
+        RedirectView rv = new RedirectView();
+        rv.setContextRelative(true);
+        rv.setUrl("/dashboard");
+
+        Leader leader = leaderRepository.findByEmail(email);
+        leader.setAdmin(false);
+        leaderRepository.save(leader);
+        return rv;
     }
 
     @GetMapping("/login")
@@ -201,9 +248,11 @@ public class AppController {
         }
     }
 
+    //NEED REFACTOR AND MOVE TO DIFFERENT CLASS
+    
     //getCampers either approved or not
     private List<Participant> getCampers(boolean approved){
-        List<Participant> participants = approved ? participantRepository.findAllByApprovedTrue() : participantRepository.findAllByApprovedFalse();
+        List<Participant> participants = participantRepository.findAllByApprovedIs(approved);
         return participants;
     }
 
@@ -223,5 +272,11 @@ public class AppController {
     private List<Participant> getCampers(boolean approved, Church church){
         List<Participant> participants = approved ? participantRepository.findAllByApprovedFalseAndChurchIs(church) : participantRepository.findAllByApprovedTrueAndChurchIs(church);
         return participants;
+    }
+
+    //getLeaders either approved or not
+    private List<Leader> getLeaders(boolean approved){
+        List<Leader> leaders = leaderRepository.findAllByApprovedIs(approved);
+        return leaders;
     }
 }

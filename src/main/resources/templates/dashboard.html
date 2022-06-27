@@ -26,8 +26,10 @@
                         <a class="nav-item nav-link" id="nav-view-tab" data-toggle="tab" href="#nav-view" role="tab" aria-controls="nnav-viewe" aria-selected="false">View</a>
                         <th:block th:case="leader">
                             <a class="nav-item nav-link" id="nav-campers-tab" data-toggle="tab" href="#nav-campers" role="tab" aria-controls="nav-campers" aria-selected="false">Manage Campers</a>
-                            <a class="nav-item nav-link" id="nav-leaders-tab" data-toggle="tab" href="#nav-leaders" role="tab" aria-controls="nav-leaders" aria-selected="false">Manage Leaders</a>
                             <a class="nav-item nav-link" id="nav-sports-tab" data-toggle="tab" href="#nav-sports" role="tab" aria-controls="nav-sports" aria-selected="false">Manage Sports</a>
+                            <th:block th:if="${#request.userPrincipal.principal.isAdmin}">
+                                <a class="nav-item nav-link" id="nav-leaders-tab" data-toggle="tab" href="#nav-leaders" role="tab" aria-controls="nav-leaders" aria-selected="false">Manage Leaders</a>
+                            </th:block>
                         </th:block>
                     </th:block>
                 </div>

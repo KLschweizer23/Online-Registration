@@ -12,11 +12,8 @@ public interface ParticipantRepository extends JpaRepository<Participant, Long>{
     //Find Any records with the same email
     Participant findByEmail(String email);
 
-    //Find any records that are approved
-    List<Participant> findAllByApprovedTrue();
-
-    //Find any records that are not yet approved
-    List<Participant> findAllByApprovedFalse();
+    //Find all Participants where approved either true or false
+    List<Participant> findAllByApprovedIs(boolean approved);
 
     //Find any records that are approved and FirstName is equal to arg1
     List<Participant> findAllByApprovedTrueAndFirstNameContaining(String firstName);
