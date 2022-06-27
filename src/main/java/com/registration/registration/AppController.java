@@ -15,6 +15,8 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
 import com.registration.registration.details.AbstractDetails;
+import com.registration.registration.details.CustomLeaderDetails;
+import com.registration.registration.details.ParticipantDetailsFunction;
 import com.registration.registration.objects.Church;
 import com.registration.registration.objects.Counter;
 import com.registration.registration.objects.Leader;
@@ -97,19 +99,32 @@ public class AppController {
     @GetMapping("/dashboard")
     public ModelAndView camperDashboard(Model model){
         ModelAndView modelAndView = new ModelAndView("thymeleaf/index");
-        modelAndView.setViewName("dashboard.html");
+        AbstractDetails details = (AbstractDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        ParticipantDetailsFunction detailsFunction = new ParticipantDetailsFunction();
+
+        if(details.getRole().equals("leader")){
+            CustomLeaderDetails leaderDetails = (CustomLeaderDetails)details;
+            Church church = details.getChurch();
+            if(!leaderDetails.isAdmin()){
+                model.addAttribute("pendingCampers", detailsFunction.getCampers(false));
+            }else{
+                model.addAttribute(("pendingCampers"), detailsFunction.getCampers(false, church));
+            }
+        }
 
         model.addAttribute("sports", getSports());
-        model.addAttribute("approvedCampers", getCampers(true));
-        model.addAttribute("pendingCampers", getCampers(false));
+        model.addAttribute("approvedCampers", detailsFunction.getCampers(true));
         model.addAttribute("counter", new Counter());
+
+        modelAndView.setViewName("dashboard.html");
 
         return modelAndView;
     }
 
     @GetMapping("/dashboard-search")
     public List<Participant> searchResult(@RequestParam(value = "keyword") String keyword){
-        return getCampers(true, keyword);
+        ParticipantDetailsFunction detailsFunction = new ParticipantDetailsFunction();
+        return detailsFunction.getCampers(true, keyword);
     }
 
     @GetMapping("/login")
@@ -162,15 +177,5 @@ public class AppController {
         }else{
             return null;
         }
-    }
-
-    private List<Participant> getCampers(boolean approved){
-        List<Participant> participants = approved ? participantRepository.findByApprovedTrue() : participantRepository.findByApprovedFalse();
-        return participants;
-    }
-
-    private List<Participant> getCampers(boolean approved, String keyword){
-        List<Participant> participants = approved ? participantRepository.findByApprovedTrueAndFirstNameContaining(keyword) : participantRepository.findByApprovedFalseAndFirstNameContaining(keyword);
-        return participants;
     }
 }
