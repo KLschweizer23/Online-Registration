@@ -262,12 +262,6 @@ public class AppController {
         return participants;
     }
 
-    //getCampers either approved or not and contains a certain keyword and is equal to a certain church
-    private List<Participant> getCampers(boolean approved, String keyword, Church church){
-        List<Participant> participants = approved ? participantRepository.findAllByApprovedFalseAndChurchIsAndFirstNameContaining(church, keyword) : participantRepository.findAllByApprovedTrueAndChurchIsAndFirstNameContaining(church, keyword);
-        return participants;
-    }
-
     //getCampers either approved or not and is equal to a certain church
     private List<Participant> getCampers(boolean approved, Church church){
         List<Participant> participants = approved ? participantRepository.findAllByApprovedFalseAndChurchIs(church) : participantRepository.findAllByApprovedTrueAndChurchIs(church);
