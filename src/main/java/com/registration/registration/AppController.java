@@ -136,7 +136,8 @@ public class AppController {
             if(leaderDetails.isAdmin()){
                 model.addAttribute("pendingCampers", getCampers(false));
             }else{
-                model.addAttribute(("pendingCampers"), getCampers(false, church));
+                System.out.println(leaderDetails.isAdmin());
+                model.addAttribute("pendingCampers", getCampers(false, church));
             }
         }
         model.addAttribute("sports", getSports());
@@ -292,7 +293,7 @@ public class AppController {
 
     //getCampers either approved or not and is equal to a certain church
     private List<Participant> getCampers(boolean approved, Church church){
-        List<Participant> participants = approved ? participantRepository.findAllByApprovedFalseAndChurchIs(church) : participantRepository.findAllByApprovedTrueAndChurchIs(church);
+        List<Participant> participants = approved ? participantRepository.findAllByApprovedTrueAndChurchIs(church) : participantRepository.findAllByApprovedFalseAndChurchIs(church);
         return participants;
     }
 

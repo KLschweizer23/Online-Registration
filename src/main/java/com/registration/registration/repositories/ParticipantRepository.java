@@ -21,10 +21,10 @@ public interface ParticipantRepository extends JpaRepository<Participant, Long>{
     //Find any records that are not approved and FirstName is equal to arg1
     List<Participant> findAllByApprovedFalseAndFirstNameContaining(String firstName);
 
-    //Find any records that are not yet approved
+    //Find any records that are not yet approved and church is equal to a certain church
     List<Participant> findAllByApprovedTrueAndChurchIs(Church church);
 
-    //Find any records that are not yet approved
+    //Find any records that are not yet approved and church is equal to a certain church
     List<Participant> findAllByApprovedFalseAndChurchIs(Church church);
 
     //Find any records that are not approved and FirstName is equal to arg1
