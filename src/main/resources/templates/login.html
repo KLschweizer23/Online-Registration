@@ -70,7 +70,6 @@
 </body>    
 <script type="text/javascript">
     var goodRole = '[[${vals}]]';
-    alert(goodRole);
     window.onload = function(){
         if(goodRole != 'error'){
             document.getElementById('myform').action = "/login?role=" + goodRole;
