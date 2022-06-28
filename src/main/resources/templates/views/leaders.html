@@ -74,24 +74,24 @@
         function leaderApproved(email) {
             var parameter = "?email=" + email;
             $.get("/dashboard-approve-leader" + parameter).done(function (data) {
-                window.location.assign("/dashboard");
             });
+            window.location.assign("/dashboard");
         }
         function leaderRejected(email) {
             $.get("/dashboard-reject-leader" + parameter).done(function (data) {
-                window.location.assign("")
             });
+            window.location.assign("/dashboard")
         }
         function makeAdmin(email) {
             var parameter = "?email=" + email;
             $.get("/dashboard-make-admin" + parameter).done(function (data) {
-                window.location.assign("/dashboard");
             });
+            window.location.assign("/dashboard");
         }
         function removeAdmin(email) {
             $.get("/dashboard-remove-admin" + parameter).done(function (data) {
-                window.location.assign("/dashboard")
             });
+            window.location.assign("/dashboard")
         }
       /*]]>*/
     </script>
