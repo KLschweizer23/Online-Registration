@@ -33,7 +33,7 @@
       var parameter = '?keyword=' + keyword
       var isLeader = /*[[${#request.userPrincipal.getPrincipal.getRole}]]*/ '';
       $('#tbody').empty();
-      $.get("http://localhost:8080/dashboard-search" + parameter, function(data){
+      $.get("/dashboard-search" + parameter, function(data){
         var template = '';
         var count = 1;
         data.forEach(x => {
