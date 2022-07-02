@@ -16,17 +16,19 @@
       </thead>
       <tbody>
         <tr th:each="camper : ${pendingCampers}">
-          <th scope="row" th:text="${counter.getCount1}">#</th>
-          <td th:text="${camper.getFirstName}">First</td>
-          <td th:text="${camper.getLastName}">Last</td>
-          <td th:text="${camper.getEmail}">Email</td>
-          <td th:text="${camper.getChurch.getName}">Church</td>
-          <td>
-            <div>
-              <button class="btn btn-success" th:name="${camper.getEmail}" onclick="approvedClicked(this.name)">Approve</button>
-              <button class="btn btn-danger" th:name="${camper.getEmail}" onclick="removeClicked(this.name)">Reject</button>
-            </div>
-          </td>
+          <th:block th:if="${camper.isApproved == false}">
+            <th scope="row" th:text="${counter.getCount1}">#</th>
+            <td th:text="${camper.getFirstName}">First</td>
+            <td th:text="${camper.getLastName}">Last</td>
+            <td th:text="${camper.getEmail}">Email</td>
+            <td th:text="${camper.getChurch.getName}">Church</td>
+            <td>
+              <div>
+                <button class="btn btn-success" th:name="${camper.getEmail}" onclick="approvedClicked(this.name)">Approve</button>
+                <button class="btn btn-danger" th:name="${camper.getEmail}" onclick="removeClicked(this.name)">Reject</button>
+              </div>
+            </td>
+          </th:block>
         </tr>
       </tbody>
     </table>
@@ -37,12 +39,18 @@
       var parameter = "?email=" + email;
       $.get("/dashboard-approve" + parameter).done(function(data){
       });
-      window.location.assign("/dashboard");
+      const button = document.getElementsByName(email);
+      button.disabled = true;
+      setTimeout(function(){
+        window.location.assign("/dashboard");
+      }, 500);
     }
     function removeClicked(email){
       $.get("/dashboard-reject" + parameter).done(function(data){
       });
-      window.location.assign("/dashboard")
+      setTimeout(function(){
+        window.location.assign("/dashboard");
+      }, 500);
     }
   /*]]>*/
   </script>

@@ -75,23 +75,31 @@
             var parameter = "?email=" + email;
             $.get("/dashboard-approve-leader" + parameter).done(function (data) {
             });
-            window.location.assign("/dashboard");
+            setTimeout(function(){
+                window.location.assign("/dashboard");
+            }, 500);
         }
         function leaderRejected(email) {
             $.get("/dashboard-reject-leader" + parameter).done(function (data) {
             });
-            window.location.assign("/dashboard")
+            setTimeout(function(){
+                window.location.assign("/dashboard");
+            }, 500);
         }
         function makeAdmin(email) {
             var parameter = "?email=" + email;
             $.get("/dashboard-make-admin" + parameter).done(function (data) {
             });
-            window.location.assign("/dashboard");
+            setTimeout(function(){
+                window.location.assign("/dashboard");
+            }, 500);
         }
         function removeAdmin(email) {
             $.get("/dashboard-remove-admin" + parameter).done(function (data) {
             });
-            window.location.assign("/dashboard")
+            setTimeout(function(){
+                window.location.assign("/dashboard");
+            }, 500);
         }
       /*]]>*/
     </script>
