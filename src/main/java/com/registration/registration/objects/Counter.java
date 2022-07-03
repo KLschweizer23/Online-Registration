@@ -4,6 +4,7 @@ public class Counter {
     private int count1 = 0;
     private int count2 = 0;
     private int count3 = 0;
+    private int count4 = 0;
 
     public int getCount1() {
         count1++;
@@ -18,5 +19,10 @@ public class Counter {
     public int getCount3() {
         count3++;
         return count3;
+    }
+
+    public int getCount4() {
+        count4++;
+        return count4;
     }
 }
