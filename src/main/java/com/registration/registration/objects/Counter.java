@@ -25,4 +25,9 @@ public class Counter {
         count4++;
         return count4;
     }
+
+    public boolean resetCount4(){
+        count4 = 0;
+        return true;
+    }
 }
