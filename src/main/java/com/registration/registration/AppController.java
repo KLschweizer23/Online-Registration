@@ -165,6 +165,7 @@ public class AppController {
             }
         }
         model.addAttribute("sports", getSports());
+        model.addAttribute("manageSports", getSports());
         model.addAttribute("approvedCampers", getCampers(true));
         model.addAttribute("approvedLeaders", getLeaders(true));
         model.addAttribute("pendingLeaders", getLeaders(false));
@@ -297,7 +298,8 @@ public class AppController {
             Participant participant = participantRepository.findByEmail(person.getEmail());
             return participant.getSports();
         }else{
-            return null;
+            List<Sport> sports = sportRepository.findAll();
+            return sports;
         }
     }
 
