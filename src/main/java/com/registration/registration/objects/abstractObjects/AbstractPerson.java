@@ -1,6 +1,7 @@
 package com.registration.registration.objects.abstractObjects;
 
 import com.registration.registration.objects.Church;
+import com.registration.registration.objects.Team;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -37,6 +38,10 @@ public class AbstractPerson {
     @NonNull
     @OneToOne(cascade = CascadeType.ALL)
     private Church church;
+
+    @NonNull
+    @OneToOne(cascade = CascadeType.ALL)
+    private Team team;
 
     @NonNull
     private boolean approved;
