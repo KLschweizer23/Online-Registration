@@ -376,7 +376,6 @@ public class AppController {
         Team[] teams = {noTeam, carmelTeam, oliveTeam, sinaiTeam, zionTeam};
 
         for(AbstractPerson person : team){
-            System.out.println(person.getFirstName() + " - " + teamIndex);
             person.setTeam(teams[teamIndex]);
         }
 
@@ -464,7 +463,6 @@ public class AppController {
     //get Approved Players
     private List<Participant> getCampers(Team team){
         List<Participant> players = participantRepository.findAllByApprovedTrueAndPlayerFalseAndTeamIs(team);
-        System.out.println(players.size());
         return players;
     }
 }
