@@ -172,17 +172,18 @@ public class AppController {
                 model.addAttribute("pendingCampers", getCampers(false, church));
             }
         }
+        List<Church> listChurch = churchRepository.findAll();
         model.addAttribute("sports", getSports());
         model.addAttribute("manageSports", getSports());
         model.addAttribute("approvedCampers", getCampers(true));
         model.addAttribute("approvedLeaders", getLeaders(true));
         model.addAttribute("pendingLeaders", getLeaders(false));
+        model.addAttribute("churches", listChurch);
 
         Team carmelTeam = teamRepository.findByName("Mt. Carmel");
         Team olivesTeam = teamRepository.findByName("Mt. Olives");
         Team sinaiTeam = teamRepository.findByName("Mt. Sinai");
         Team zionTeam = teamRepository.findByName("Mt. Zion");
-
 
         model.addAttribute("carmelTeam", getCampers(carmelTeam));
         model.addAttribute("olivesTeam", getCampers(olivesTeam));
@@ -190,6 +191,7 @@ public class AppController {
         model.addAttribute("zionTeam", getCampers(zionTeam));
 
         model.addAttribute("counter", new Counter());
+        model.addAttribute("camper", new Participant());
 
         return modelAndView;
     }
@@ -286,7 +288,7 @@ public class AppController {
         participantRepository.saveAll(participants);
         return rv;
     }
-    
+
     @GetMapping("/dashboard-team-generate")
     public RedirectView generateTeam(){
         //return all participants with no team
@@ -382,6 +384,68 @@ public class AppController {
         participantRepository.saveAll(team);
     }
 
+    @PostMapping("/dashboard_process_register")
+    public RedirectView processRegisterOnSite(Participant participant, @RequestParam(value="spo", required = false) long[] spo){
+        RedirectView rv = new RedirectView();
+        rv.setContextRelative(true);
+        rv.setUrl("/dashboard");
+        participant.setPassword(participant.getLastName());
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        String encodedPassword = encoder.encode(participant.getPassword());
+        participant.setPassword(encodedPassword);
+        participant.setEmail(participant.getFirstName() + "@gmail.com");
+        participant.setApproved(true);
+        participant.setPaid(true);
+        participant.setBirthday("2000-01-01");
+
+        Team belongedTeam = new Team();
+
+        Team carmelTeam = teamRepository.findByName("Mt. Carmel");
+        Team oliveTeam = teamRepository.findByName("Mt. Olives");
+        Team sinaiTeam = teamRepository.findByName("Mt. Sinai");
+        Team zionTeam = teamRepository.findByName("Mt. Zion");
+
+        long carmelCount = getCount(carmelTeam);
+        long oliveCount = getCount(oliveTeam);
+        long sinaiCount = getCount(sinaiTeam);
+        long zionCount = getCount(zionTeam);
+        
+        if(carmelCount != oliveCount){
+            belongedTeam = oliveTeam;
+        }else{
+            if(oliveCount != sinaiCount){
+                belongedTeam = sinaiTeam;
+            }else{
+                if(sinaiCount != zionCount){
+                    belongedTeam = zionTeam;
+                }else{
+                    belongedTeam = carmelTeam;
+                }
+            }
+        }
+        participant.setTeam(belongedTeam);
+        if(spo != null){
+            Sport sport = null;
+            List<Sport> sports = new ArrayList<>();
+            for(int i = 0; i < spo.length; i++){
+                if(sportRepository.existsById((spo[i]))){
+                    sport = sportRepository.findById(spo[i]).get();
+                    sports.add(sport);
+                }
+            }
+            participant.setPlayer(true);
+            participant.setSports(sports);
+        }
+
+        participantRepository.save(participant);
+        return rv;
+    }
+
+    int getAvailableTeam(){
+
+        return 0;
+    }
+
     @GetMapping("/login")
     public ModelAndView loginPage(Model model, @RequestParam(value = "vals", required = false) String val){
         ModelAndView modelAndView = new ModelAndView();
@@ -464,5 +528,11 @@ public class AppController {
     private List<Participant> getCampers(Team team){
         List<Participant> players = participantRepository.findAllByApprovedTrueAndPlayerFalseAndTeamIs(team);
         return players;
+    }
+
+    //get count by team
+    private long getCount(Team team){
+        long count = participantRepository.countByApprovedTrueAndPlayerFalseAndTeamIs(team);
+        return count;
     }
 }

@@ -38,5 +38,8 @@ public interface ParticipantRepository extends JpaRepository<Participant, Long>{
     List<Participant> findAllByApprovedTrueAndPlayerFalseAndTeamIs(Team team);
 
     //Find any records that are approved players and their team
+    Long countByApprovedTrueAndPlayerFalseAndTeamIs(Team team);
+
+    //Find any records that are approved players and their team
     List<Participant> findAllByApprovedTrueAndPlayerFalseAndSexIs(String sex);
 }

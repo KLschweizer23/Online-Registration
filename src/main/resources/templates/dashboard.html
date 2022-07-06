@@ -21,6 +21,10 @@
         <div class="pt-2">
             <nav>
                 <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                    <th:block th:if="${#request.userPrincipal.principal.isAdmin}">
+                        <a class="nav-item nav-link" id="nav-leaders-tab" data-toggle="tab" href="#nav-leaders" role="tab" aria-controls="nav-leaders" aria-selected="false">Manage Leaders</a>
+                        <a class="nav-item nav-link" id="nav-reg-tab" data-toggle="tab" href="#nav-reg" role="tab" aria-controls="nav-reg" aria-selected="false">On site Registration</a>
+                    </th:block>
                     <a class="nav-item nav-link active" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="true">Profile</a>
                     <th:block th:if="${#request.userPrincipal.principal.isApproved} == true" th:switch="${#request.userPrincipal.principal.getRole}">
                         <a class="nav-item nav-link" id="nav-view-tab" data-toggle="tab" href="#nav-view" role="tab" aria-controls="nnav-viewe" aria-selected="false">View</a>
@@ -28,10 +32,6 @@
                             <a class="nav-item nav-link" id="nav-campers-tab" data-toggle="tab" href="#nav-campers" role="tab" aria-controls="nav-campers" aria-selected="false">Manage Campers</a>
                             <a class="nav-item nav-link" id="nav-sports-tab" data-toggle="tab" href="#nav-sports" role="tab" aria-controls="nav-sports" aria-selected="false">Manage Sports</a>
                             <a class="nav-item nav-link" id="nav-teams-tab" data-toggle="tab" href="#nav-teams" role="tab" aria-controls="nav-teams" aria-selected="false">Manage Teams</a>
-                            <th:block th:if="${#request.userPrincipal.principal.isAdmin}">
-                                <a class="nav-item nav-link" id="nav-leaders-tab" data-toggle="tab" href="#nav-leaders" role="tab" aria-controls="nav-leaders" aria-selected="false">Manage Leaders</a>
-                                <a class="nav-item nav-link" id="nav-reg-tab" data-toggle="tab" href="#nav-reg" role="tab" aria-controls="nav-reg" aria-selected="false">On site Registration</a>
-                            </th:block>
                         </th:block>
                     </th:block>
                 </div>
