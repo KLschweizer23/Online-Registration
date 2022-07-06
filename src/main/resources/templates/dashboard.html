@@ -30,6 +30,7 @@
                             <a class="nav-item nav-link" id="nav-teams-tab" data-toggle="tab" href="#nav-teams" role="tab" aria-controls="nav-teams" aria-selected="false">Manage Teams</a>
                             <th:block th:if="${#request.userPrincipal.principal.isAdmin}">
                                 <a class="nav-item nav-link" id="nav-leaders-tab" data-toggle="tab" href="#nav-leaders" role="tab" aria-controls="nav-leaders" aria-selected="false">Manage Leaders</a>
+                                <a class="nav-item nav-link" id="nav-reg-tab" data-toggle="tab" href="#nav-reg" role="tab" aria-controls="nav-reg" aria-selected="false">On site Registration</a>
                             </th:block>
                         </th:block>
                     </th:block>
@@ -52,6 +53,9 @@
                     ...
                 </div>
                 <div th:insert="/views/teams :: teams" class="h-100 tab-pane fade" id="nav-teams" role="tabpanel" aria-labelledby="nav-teams-tab">
+                    ...
+                </div>
+                <div th:insert="/views/register :: register" class="h-100 tab-pane fade" id="nav-reg" role="tabpanel" aria-labelledby="nav-reg-tab">
                     ...
                 </div>
             </div>
