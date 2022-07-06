@@ -2,6 +2,7 @@ package com.registration.registration;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -21,16 +22,20 @@ import com.registration.registration.objects.Counter;
 import com.registration.registration.objects.Leader;
 import com.registration.registration.objects.Participant;
 import com.registration.registration.objects.Sport;
+import com.registration.registration.objects.Team;
+import com.registration.registration.objects.abstractObjects.AbstractPerson;
 import com.registration.registration.repositories.ChurchRepository;
 import com.registration.registration.repositories.LeaderRepository;
 import com.registration.registration.repositories.ParticipantRepository;
 import com.registration.registration.repositories.SportRepository;
+import com.registration.registration.repositories.TeamRepository;
 
 @RestController
 public class AppController {
     
     @Autowired
     private ParticipantRepository participantRepository;
+
     @Autowired
     private LeaderRepository leaderRepository;
     
@@ -39,6 +44,9 @@ public class AppController {
 
     @Autowired
     private SportRepository sportRepository;
+
+    @Autowired
+    private TeamRepository teamRepository;
 
     @GetMapping("")
     public ModelAndView homePage(){
@@ -169,6 +177,18 @@ public class AppController {
         model.addAttribute("approvedCampers", getCampers(true));
         model.addAttribute("approvedLeaders", getLeaders(true));
         model.addAttribute("pendingLeaders", getLeaders(false));
+
+        Team carmelTeam = teamRepository.findByName("Mt. Carmel");
+        Team olivesTeam = teamRepository.findByName("Mt. Olives");
+        Team sinaiTeam = teamRepository.findByName("Mt. Sinai");
+        Team zionTeam = teamRepository.findByName("Mt. Zion");
+
+
+        model.addAttribute("carmelTeam", getCampers(carmelTeam));
+        model.addAttribute("olivesTeam", getCampers(olivesTeam));
+        model.addAttribute("sinaiTeam", getCampers(sinaiTeam));
+        model.addAttribute("zionTeam", getCampers(zionTeam));
+
         model.addAttribute("counter", new Counter());
 
         return modelAndView;
@@ -250,6 +270,118 @@ public class AppController {
         leaderRepository.save(leader);
         return rv;
     }
+    
+    @GetMapping("/dashboard-team-reset")
+    public RedirectView resetTeam(){
+        //return all participants with no team
+        RedirectView rv = new RedirectView();
+        rv.setContextRelative(true);
+        rv.setUrl("/dashboard");
+
+        List<Participant> participants = participantRepository.findAll();
+        Team noTeam = teamRepository.findById(6L).get();
+        for(AbstractPerson person : participants){
+            person.setTeam(noTeam);
+        }
+        participantRepository.saveAll(participants);
+        return rv;
+    }
+    
+    @GetMapping("/dashboard-team-generate")
+    public RedirectView generateTeam(){
+        //return all participants with no team
+        RedirectView rv = new RedirectView();
+        Random random = new Random();
+
+        rv.setContextRelative(true);
+        rv.setUrl("/dashboard");
+
+        List<Participant> femaleParticipants = participantRepository.findAllByApprovedTrueAndPlayerFalseAndSexIs("female");
+        List<Participant> maleParticipants = participantRepository.findAllByApprovedTrueAndPlayerFalseAndSexIs("male");
+
+        List<Participant> carmelTeam = new ArrayList<>();
+        List<Participant> oliveTeam = new ArrayList<>();
+        List<Participant> sinaiTeam = new ArrayList<>();
+        List<Participant> zionTeam = new ArrayList<>();
+
+        int femaleCount = femaleParticipants.size();
+        int maleCount = maleParticipants.size();
+        int team = 1;
+
+        for(int i = 0; i < femaleCount; i++, team++){
+            if(team > 4)
+                team = 1;
+            System.out.println(team);
+            int index = random.nextInt(femaleParticipants.size());
+            Participant member = femaleParticipants.get(index);
+            femaleParticipants.remove(index);
+            switch(team){
+                case 1:
+                    carmelTeam.add(member);
+                    break;
+                case 2:
+                    oliveTeam.add(member);
+                    break;
+                case 3:
+                    sinaiTeam.add(member);
+                    break;
+                case 4:
+                    zionTeam.add(member);
+                    break;
+                default:
+                    System.out.println("ERROR: Too much team index");
+                    break;
+            }
+        }
+        for(int i = 0; i < maleCount; i++, team++){
+            if(team > 4)
+                team = 1;
+            int index = random.nextInt(maleParticipants.size());
+            Participant member = maleParticipants.get(index);
+            maleParticipants.remove(index);
+            switch(team){
+                case 1:
+                    carmelTeam.add(member);
+                    break;
+                case 2:
+                    oliveTeam.add(member);
+                    break;
+                case 3:
+                    sinaiTeam.add(member);
+                    break;
+                case 4:
+                    zionTeam.add(member);
+                    break;
+                default:
+                    System.out.println("ERROR: Too much team index");
+                    break;
+            }
+        }
+
+        assignAllMembers(carmelTeam, 1);
+        assignAllMembers(oliveTeam, 2);
+        assignAllMembers(sinaiTeam, 3);
+        assignAllMembers(zionTeam, 4);
+
+        return rv;
+    }
+
+    void assignAllMembers(List<Participant> team, int teamIndex){
+        Team noTeam = teamRepository.findByName("None");
+        Team carmelTeam = teamRepository.findByName("Mt. Carmel");
+        Team oliveTeam = teamRepository.findByName("Mt. Olives");
+        Team sinaiTeam = teamRepository.findByName("Mt. Sinai");
+        Team zionTeam = teamRepository.findByName("Mt. Zion");
+
+        Team[] teams = {noTeam, carmelTeam, oliveTeam, sinaiTeam, zionTeam};
+
+        for(AbstractPerson person : team){
+            System.out.println(person.getFirstName() + " - " + teamIndex);
+            person.setTeam(teams[teamIndex]);
+        }
+
+        participantRepository.saveAll(team);
+    }
 
     @GetMapping("/login")
     public ModelAndView loginPage(Model model, @RequestParam(value = "vals", required = false) String val){
@@ -327,5 +459,12 @@ public class AppController {
     private List<Leader> getLeaders(boolean approved){
         List<Leader> leaders = leaderRepository.findAllByApprovedIs(approved);
         return leaders;
+    }
+
+    //get Approved Players
+    private List<Participant> getCampers(Team team){
+        List<Participant> players = participantRepository.findAllByApprovedTrueAndPlayerFalseAndTeamIs(team);
+        System.out.println(players.size());
+        return players;
     }
 }

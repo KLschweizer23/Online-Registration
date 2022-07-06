@@ -11,6 +11,9 @@ import javax.persistence.Table;
 @Table(name = "teams")
 public class Team {
     public Team(){}
+    public Team(Long id){
+        this.id = id;
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

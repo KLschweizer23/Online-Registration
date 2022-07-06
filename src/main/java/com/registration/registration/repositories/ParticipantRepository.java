@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.registration.registration.objects.Church;
 import com.registration.registration.objects.Participant;
+import com.registration.registration.objects.Team;
 
 public interface ParticipantRepository extends JpaRepository<Participant, Long>{
     
@@ -32,4 +33,10 @@ public interface ParticipantRepository extends JpaRepository<Participant, Long>{
 
     //Find any records that are not approved and FirstName is equal to arg1
     List<Participant> findAllByApprovedTrueAndChurchIsAndFirstNameContaining(Church church, String firstName);
+
+    //Find any records that are approved players and their team
+    List<Participant> findAllByApprovedTrueAndPlayerFalseAndTeamIs(Team team);
+
+    //Find any records that are approved players and their team
+    List<Participant> findAllByApprovedTrueAndPlayerFalseAndSexIs(String sex);
 }
